@@ -9,7 +9,7 @@ local autorunApps =
   "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
   "redshift",
   -- "nextcloud",
-  "picom",
+  -- "picom",
   -- "nm-applet",
   -- "xfce4-power-manager",
   -- "xset s off -dpms",

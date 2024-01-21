@@ -354,21 +354,28 @@ awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super },
     key         = 'Print',
-    description = 'takes a screenshot',
+    description = 'Takes a screenshot',
     group       = 'miscelaneous',
     on_press    = screenshot.screen
   },
   awful.key {
+    modifiers   = { mod.super, mod.shift },
+    key         = 'Print',
+    description = 'Takes a window screenshot',
+    group       = 'miscelaneous',
+    on_press    = screenshot.window
+  },
+  awful.key {
     modifiers   = {},
     key         = 'Print',
-    description = 'takes a selection screenshot',
+    description = 'Takes a selection screenshot',
     group       = 'miscelaneous',
     on_press    = screenshot.selection
   },
   awful.key({ mod.super, }, "q",
-  function(c)
-    awesome.emit_signal("toggle::scrotter")
-  end),
+    function(c)
+      awesome.emit_signal("toggle::scrotter")
+    end),
 
   --color picker
   awful.key {

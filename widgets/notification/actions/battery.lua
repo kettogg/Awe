@@ -41,7 +41,7 @@ awesome.connect_signal('signal::battery', function(level, state, _, _, _)
         display_half = true
     end
 
-    if display_charge and state == 1 then
+    if display_charge and state == 4 then
         naughty.notification({
             icon    = gc.recolor_image(asset_path .. 'battery_chargin.svg', colors.cyan),
             title   = 'Recharging energy!',

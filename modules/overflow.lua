@@ -408,7 +408,7 @@ local function build_grabber(container, initial_x, initial_y, geo)
     -- transformed by something like `wibox.container.rotate`.
     local matrix_from_device = geo.hierarchy:get_matrix_from_device()
     local wgeo = geo.drawable.drawable:geometry()
-    local matrix = matrix_from_device:translate( -wgeo.x, -wgeo.y)
+    local matrix = matrix_from_device:translate(-wgeo.x, -wgeo.y)
 
     return function(mouse)
         if not mouse.buttons[1] then
@@ -499,7 +499,7 @@ local function new(dir, ...)
 
     ret:connect_signal('button::press', function(self, _, _, button)
         if button == 4 then
-            self:scroll( -1)
+            self:scroll(-1)
         elseif button == 5 then
             self:scroll(1)
         end
@@ -531,4 +531,3 @@ function overflow.vertical(...)
 end
 
 return setmetatable(overflow, overflow.mt)
-

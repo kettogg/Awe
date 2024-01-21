@@ -16,9 +16,9 @@ local function battery_emit()
       -- is stored as a bool, and also as an int for registering changes in
       -- battery status.
       local level     = string.match(stdout:match('(%d+)'), '(%d+)')
-      print(level)
-      local level_int = tonumber(level)  
-      print(level_int)               -- integer
+      -- print(level)
+      local level_int = tonumber(level)
+      -- print(level_int)               -- integer
       local power     = not stdout:match('Discharging') -- boolean
       awesome.emit_signal('signal::bat', level_int, power)
     end)

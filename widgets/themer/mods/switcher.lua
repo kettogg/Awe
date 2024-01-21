@@ -32,7 +32,8 @@ local themes     = {
   'ephemeral',
   'amarena',
   'skyfall',
-  'biscuit'
+  'biscuit',
+  'tsuki'
 }
 
 local index      = helpers.indexOf(themes, scheme)

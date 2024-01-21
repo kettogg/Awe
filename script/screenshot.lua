@@ -1,15 +1,15 @@
 -- Screenshot script using maim and xclip. `awful.screenshot` has yet to be
 -- reliable enough to be usable.
 
-local awful     = require('awful')
-local naughty   = require('naughty')
-local beautiful = require('beautiful')
-local gears     = require('gears')
+local awful        = require('awful')
+local naughty      = require('naughty')
+local beautiful    = require('beautiful')
+local gears        = require('gears')
 
-local gfs       = gears.filesystem
-local gc        = gears.color
+local gfs          = gears.filesystem
+local gc           = gears.color
 
-local user      = require('config.user')
+local user         = require('config.user')
 
 -- The directory where PERMANENT files would be stored.
 local perm_dir     = user.screenshot_dir or os.getenv('HOME')
@@ -71,12 +71,12 @@ local function take_screenshot(cmd)
    local tmp = '/tmp/ss-' .. os.date('%Y%m%d-%H%M%S') .. '.png'
    awful.spawn.easy_async_with_shell(cmd .. ' ' .. tmp, function()
       awful.spawn.with_shell('xclip -selection clip -t image/png -i ' .. tmp)
-      send_notif(tmp)                                  
+      send_notif(tmp)
    end)
 end
 
-
 return {
-   screen    = function() take_screenshot('maim')    end,
-   selection = function() take_screenshot('maim -s') end
+   screen    = function() take_screenshot('maim') end,
+   selection = function() take_screenshot('maim -s') end,
+   window    = function() take_screenshot('maim -i $(xdotool getactivewindow)') end,
 }

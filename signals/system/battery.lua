@@ -10,6 +10,7 @@ awful.spawn.easy_async_with_shell(
                 device_path = stdout:gsub("\n", ""),
                 instant_update = true
             }):connect_signal("upower::update", function(_, device)
+                -- print(device.state) -- 4.0 = charging
                 local time_to_empty = device.time_to_empty / 60
                 local time_to_full  = device.time_to_full / 60
                 awesome.emit_signal("signal::battery",

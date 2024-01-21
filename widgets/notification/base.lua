@@ -9,12 +9,13 @@ local dpi       = beautiful.xresources.apply_dpi
 local helpers   = require('helpers')
 local rubato    = require('modules.rubato')
 
-local colors = require('widgets.notification.colors')
+local colors    = require('widgets.notification.colors')
 
-local def_icon =
-   gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. 'theme/assets/awesome.svg', beautiful.fg_normal)
+local def_icon  =
+    gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. 'theme/assets/awesome.svg', beautiful
+       .fg_normal)
 
-local _W = {}
+local _W        = {}
 
 function _W.init_actions()
    require('widgets.notification.actions.battery')
@@ -25,14 +26,13 @@ end
 
 function _W.title(n)
    return wibox.widget {
-      widget = wibox.container.scroll.horizontal,
-      speed  = 66,
-      rate   = 60,
+      widget        = wibox.container.scroll.horizontal,
+      speed         = 66,
+      rate          = 60,
       step_function = wibox.container.scroll.step_functions.nonlinear_back_and_forth,
       {
          widget = wibox.widget.textbox,
-         markup = n.title ~= nil and '<b>' .. n.title .. '</b>'
-            or '<b>Notification</b>',
+         markup = n.title ~= nil and n.title or 'Notification',
          font   = beautiful.font_sans .. dpi(9),
          halign = 'center',
          valign = 'center'
@@ -42,14 +42,14 @@ end
 
 function _W.body(n)
    return wibox.widget {
-      widget = wibox.container.scroll.vertical,
-      speed  = 66,
-      rate   = 60,
+      widget        = wibox.container.scroll.vertical,
+      speed         = 66,
+      rate          = 60,
       step_function = wibox.container.scroll.step_functions.nonlinear_back_and_forth,
       {
          widget = wibox.widget.textbox,
          markup = gears.string.xml_unescape(n.message),
-         font   = beautiful.font_sans .. dpi(9),
+         font   = beautiful.font_sans .. dpi(8),
          halign = 'center',
          valign = 'center'
       }
@@ -58,17 +58,17 @@ end
 
 function _W.image(n)
    return wibox.widget {
-      widget = wibox.widget.imagebox,
-      image  = n.icon and helpers.crop_surface(1, gears.surface.load_uncached(n.icon))
-         or def_icon,
-      resize = true,
-      halign = 'center',
-      valign = 'center',
-      clip_shape = function(c, w, h)
-         gears.shape.rounded_rect(c, w, h, dpi(8))
+      widget        = wibox.widget.imagebox,
+      image         = n.icon and helpers.crop_surface(1, gears.surface.load_uncached(n.icon))
+          or def_icon,
+      resize        = true,
+      halign        = 'center',
+      valign        = 'center',
+      clip_shape    = function(c, w, h)
+         gears.shape.rounded_rect(c, w, h, dpi(4))
       end,
       forced_height = dpi(40),
-      forced_width = dpi(40)
+      forced_width  = dpi(40)
    }
 end
 
@@ -80,14 +80,14 @@ function _W.timeout()
       value            = 0,
       background_color = colors.bg_light,
       shape            = function(c, w, h)
-         gears.shape.rounded_rect(c, w, h, dpi(6))
+         gears.shape.rounded_rect(c, w, h, dpi(2))
       end,
       bar_shape        = function(c, w, h)
-         gears.shape.rounded_rect(c, w, h, dpi(4))
+         gears.shape.rounded_rect(c, w, h, dpi(2))
       end,
       color            = {
          type  = 'linear',
-         from  = { 0, 0   },
+         from  = { 0, 0 },
          to    = { 0, 100 },
          stops = { { 0, colors.green }, { 1, colors.green .. '8c' } }
       },
@@ -101,18 +101,18 @@ function _W.actions(n)
       widget  = wibox.container.margin,
       margins = { top = dpi(2) },
       {
-         widget       = naughty.list.actions,
-         notification = n,
-         base_layout  = wibox.widget {
+         widget          = naughty.list.actions,
+         notification    = n,
+         base_layout     = wibox.widget {
             spacing = dpi(4),
             layout  = wibox.layout.flex.horizontal
          },
-         style = {
+         style           = {
             underline_normal   = false,
             underline_selected = false,
             bg_normal          = colors.mid_dark,
             shape_normal       = function(c, w, h)
-               gears.shape.rounded_rect(c, w, h, dpi(6))
+               gears.shape.rounded_rect(c, w, h, dpi(2))
             end,
             border_width       = 0
          },
@@ -139,10 +139,10 @@ function _W.close(n)
       widget  = wibox.container.margin,
       margins = dpi(9),
       {
-         widget = wibox.container.background,
-         shape  = gears.shape.circle,
-         bg     = colors.red .. '80',
-         id     = 'bg_role',
+         widget       = wibox.container.background,
+         shape        = gears.shape.circle,
+         bg           = colors.red .. '80',
+         id           = 'bg_role',
          forced_width = dpi(13)
       },
       buttons = { awful.button({}, 1, function() n:destroy() end) },
@@ -169,12 +169,12 @@ function _W.layout(n)
    local timeout_bar = _W.timeout()
 
    local widget = naughty.layout.box {
-      notification = n,
-      cursor       = 'hand2',
-      border_width = 0,
-      bg           = colors.transparent,
-      shape        = function(c, w, h)
-         gears.shape.rounded_rect(c, w, h, dpi(6))
+      notification    = n,
+      cursor          = 'hand2',
+      border_width    = 0,
+      bg              = colors.transparent,
+      shape           = function(c, w, h)
+         gears.shape.rounded_rect(c, w, h, dpi(2))
       end,
       widget_template = {
          widget   = wibox.container.constraint,
@@ -188,7 +188,7 @@ function _W.layout(n)
                widget = wibox.container.background,
                bg     = colors.bg_normal,
                shape  = function(c, w, h)
-                  gears.shape.rounded_rect(c, w, h, dpi(8))
+                  gears.shape.rounded_rect(c, w, h, dpi(2))
                end,
                {
                   layout = wibox.layout.align.vertical,
@@ -220,9 +220,9 @@ function _W.layout(n)
                   {
                      widget = wibox.container.background,
                      bg     = {
-                        type = 'linear',
-                        from = { 0, 0 },
-                        to   = { 0, 85 },
+                        type  = 'linear',
+                        from  = { 0, 0 },
+                        to    = { 0, 85 },
                         stops = { { 0, colors.bg_light .. '8c' }, { 1, colors.bg_normal } }
                      },
                      {

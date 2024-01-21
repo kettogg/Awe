@@ -16,7 +16,7 @@ awful.screen.connect_for_each_screen(function(s)
     shape = helpers.rrect(2),
     screen = s,
     width = 660,
-    height = 610,
+    height = 590,
     bg = beautiful.bg_normal .. "00",
     ontop = true,
     visible = false,

@@ -44,20 +44,20 @@ screen.connect_signal('request::desktop_decoration', function(s)
    widgets.exitscreen(s)
 
    -- TODO
-   -- You don't need to call these widgets here because you don't 
+   -- You don't need to call these widgets here because you don't
    -- need to pass the screen object to them as an argument.
    -- brightness indicator
-   widgets.popups.brightness_popups(s)
-   -- volume indicator 
-   widgets.popups.volume_popus(s)
+   -- widgets.popups.brightness_popups(s)
+   -- -- volume indicator
+   -- widgets.popups.volume_popus(s)
 end)
 
 awful.screen.connect_for_each_screen(function(s)
-      -- Sets a tag padding using the already dpi calculated `beautiful.useless_gap`.
-      s.padding = {
-         bottom = beautiful.useless_gap,
-         top    = beautiful.useless_gap,
-         left   = beautiful.useless_gap,
-         right  = beautiful.useless_gap
-      }
+   -- Sets a tag padding using the already dpi calculated `beautiful.useless_gap`.
+   s.padding = {
+      bottom = beautiful.useless_gap,
+      top    = beautiful.useless_gap,
+      left   = beautiful.useless_gap,
+      right  = beautiful.useless_gap
+   }
 end)

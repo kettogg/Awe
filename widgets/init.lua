@@ -7,5 +7,6 @@ return {
    popups     = require(... .. '.popups'),
    themer     = require(... .. '.themer'),
    sysetting  = require(... .. '.sysetting'),
-   lock       = require(... .. '.lock')
+   lock       = require(... .. '.lock'),
+   -- notify     = require(... .. '.notify'), -- This is chadcat's notification popup
 }
