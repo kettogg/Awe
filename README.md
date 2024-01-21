@@ -14,7 +14,7 @@
 </div>
 
 > [!Note]
-> Very Very Messy right now as it has lot of modules taken from others.
+> Very very messy right now as it has lot of modules taken from others.
 
 ##Showcase
 
