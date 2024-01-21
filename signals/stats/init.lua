@@ -1,0 +1,3 @@
+return {
+  weather = require(... .. 'weather'),
+}
