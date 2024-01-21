@@ -66,3 +66,4 @@
 Stole the configs from these awesome people :)
 * [Chadcat](https://github.com/chadcat7)
 * [Gwen](https://github.com/elythh)
+* [Elenapan](https://github.com/elenapan)
