@@ -61,6 +61,11 @@
   </tbody>
 </table>
 
+## Requirements
+
+- AwesomeWM
+- upower (For the Battery Widget)
+
 ## Credits
 
 Stole the configs from these awesome people :)
