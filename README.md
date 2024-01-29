@@ -16,7 +16,7 @@
 > [!Note]
 > Very Very Messy right now as it has lot of modules taken from others.
 
-##Showcase
+<h3> Showcase </h3>
 
 <table>
   <thead>
@@ -61,7 +61,7 @@
   </tbody>
 </table>
 
-## Credits
+<h3> Credits </h3>
 
 Stole the configs from these awesome people :)
 * [Chadcat](https://github.com/chadcat7)
