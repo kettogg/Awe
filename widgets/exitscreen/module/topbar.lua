@@ -1,12 +1,9 @@
-local wibox      = require("wibox")
-local awful      = require("awful")
-local colors     = require('widgets.exitscreen.module.colors')
-local gears      = require('gears')
-local beautiful  = require('beautiful')
-local dpi        = beautiful.xresources.apply_dpi
-local gfs        = gears.filesystem
-local asset_path = gfs.get_configuration_dir() .. 'theme/assets/close/'
-local helpers    = require('helpers')
+local wibox     = require("wibox")
+local awful     = require("awful")
+local gears     = require('gears')
+local beautiful = require('beautiful')
+local dpi       = beautiful.xresources.apply_dpi
+local helpers   = require('helpers')
 
 return wibox.widget {
   {

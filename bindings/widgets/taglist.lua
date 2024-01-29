@@ -1,16 +1,15 @@
-local awful = require'awful'
-
-local mod = require'bindings.mod'
+local awful = require 'awful'
+local mod = require 'bindings.mod'
 
 return {
    buttons = {
-      awful.button{
+      awful.button {
          modifiers = {},
          button    = 1,
          on_press  = function(t) t:view_only() end,
       },
-      awful.button{
-         modifiers = {mod.super},
+      awful.button {
+         modifiers = { mod.super },
          button    = 1,
          on_press  = function(t)
             if client.focus then
@@ -32,15 +31,15 @@ return {
       --       end
       --    end
       -- },
-      awful.button{
+      awful.button {
          modifiers = {},
          button    = 4,
-         on_press  = function(t) awful.tag.viewprev(t.screen) end,
+         on_press  = function(t) awful.tag.viewnext(t.screen) end,
       },
-      awful.button{
+      awful.button {
          modifiers = {},
          button    = 5,
-         on_press  = function(t) awful.tag.viewnext(t.screen) end,
+         on_press  = function(t) awful.tag.viewprev(t.screen) end,
       },
    },
 }

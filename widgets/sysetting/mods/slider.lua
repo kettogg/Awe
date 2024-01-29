@@ -1,113 +1,129 @@
-local wibox        = require("wibox")
-local awful        = require("awful")
-local beautiful    = require("beautiful")
-local dpi          = require("beautiful").xresources.apply_dpi
-local gears        = require("gears")
-local helpers      = require("helpers")
+local wibox           = require("wibox")
+local awful           = require("awful")
+local beautiful       = require("beautiful")
+local dpi             = require("beautiful").xresources.apply_dpi
+local gears           = require("gears")
+local helpers         = require("helpers")
 
-local createHandle = function()
-  return function(cr)
-    gears.shape.rounded_rect(cr, 25, 25, 15)
-  end
-end
-
-local createSlider = function(icon, signal, command)
-  local slidSlider = wibox.widget {
-    bar_shape           = helpers.rrect(15),
-    bar_height          = 3,
-    handle_color        = beautiful.bg_normal,
-    bar_color           = beautiful.bg_normal .. '00',
-    bar_active_color    = beautiful.fg_normal,
-    handle_shape        = createHandle(),
-    handle_border_width = 2,
-    handle_width        = dpi(10),
-    handle_margins      = { top = 5.9 },
-    handle_border_color = beautiful.fg_normal,
-    value               = 25,
-    forced_height       = 40,
-    maximum             = 100,
-    widget              = wibox.widget.slider,
-  }
-
-  local slidLabel  = wibox.widget {
-
-    font = beautiful.font_nerd.. " 12",
-    markup = "86" .. "%",
-    valign = "center",
-    widget = wibox.widget.textbox,
-  }
-
-
-  local slidLabelBox = wibox.widget {
-    slidLabel,
-    widget = wibox.container.margin,
-    margins = {
-      left = dpi(20),
-    }
-  }
-
-  local slidIcon = wibox.widget {
-    {
-      font = beautiful.icon .. " 18",
-      markup = helpers.colorizeText(icon, beautiful.fg_normal),
-      valign = "center",
-      widget = wibox.widget.textbox,
-    },
-    widget = wibox.container.margin,
-  }
-
-  local slidScale = wibox.widget {
-    nil,
-    {
-      {
-        slidIcon,
-        widget = wibox.container.place,
-        valign = "center",
-        halign = "left"
-      },
-      {
-        {
-          {
-            {
-              widget = wibox.container.background,
-              forced_height = 2,
-              shape = helpers.rrect(10),
-              bg = beautiful.bg_light
-            },
-            widget = wibox.container.place,
-            content_fill_horizontal = true,
-            valign = "center",
-          },
-          {
-            slidSlider,
-            widget = wibox.container.margin,
-          },
-
-          layout = wibox.layout.stack,
-        },
-        widget = wibox.container.margin,
-      },
-      layout = wibox.layout.fixed.horizontal,
-      spacing = 20
-    },
-    slidLabelBox,
-    layout = wibox.layout.align.horizontal,
-  }
-
-  awesome.connect_signal('signal::' .. signal, function(value)
-    slidSlider.value = value
-  end)
-  slidSlider:connect_signal("property::value", function(_, new_value)
-    awful.spawn.with_shell(string.format(command, new_value))
-  end)
-  return slidScale
-end
-
-local widget       = wibox.widget {
-  createSlider("", "brightness", "brightnessctl s %d%%"),
-  createSlider("", "volume", "pamixer --set-volume %d"),
-  layout = wibox.layout.fixed.vertical,
-  spacing = 25,
+-- Progressbar
+local brightness      = wibox.widget {
+  widget = wibox.widget.slider,
+  value = 50,
+  maximum = 100,
+  forced_width = dpi(300),
+  shape = gears.shape.rounded_bar,
+  bar_shape = gears.shape.rounded_bar,
+  bar_color = beautiful.fg_normal .. '1a',
+  bar_margins = { bottom = dpi(20), top = dpi(20) },
+  bar_active_color = beautiful.fg_normal,
+  handle_width = dpi(16),
+  handle_shape = gears.shape.circle,
+  handle_color = beautiful.bg_normal,
+  handle_border_width = 2,
+  handle_border_color = beautiful.fg_normal
 }
 
-return widget
+local brightness_icon = wibox.widget {
+  widget = wibox.widget.textbox,
+  markup = helpers.colorizeText("明", beautiful.fg_normal),
+  font = beautiful.icon_alt .. " 16",
+  align = "center",
+  valign = "center"
+}
+
+local brightness_text = wibox.widget {
+  widget = wibox.widget.textbox,
+  markup = helpers.colorizeText("10%", beautiful.fg_normal),
+  font = beautiful.font_nerd .. " 13",
+  align = "center",
+  valign = "center"
+}
+
+local bright_init     = wibox.widget {
+  brightness_icon,
+  brightness,
+  brightness_text,
+  layout = wibox.layout.fixed.horizontal,
+  forced_height = dpi(42),
+  spacing = dpi(17)
+}
+
+awful.spawn.easy_async_with_shell("brightnessctl | grep -i  'current' | awk '{ print $4}' | tr -d \"(%)\"",
+  function(stdout)
+    local value = string.gsub(stdout, '^%s*(.-)%s*$', '%1')
+    brightness.value = tonumber(value)
+    brightness_text.markup = helpers.colorizeText(value .. "%", beautiful.fg_normal)
+  end)
+
+brightness:connect_signal("property::value", function(_, new_value)
+  brightness_text.markup = helpers.colorizeText(new_value .. "%", beautiful.fg_normal)
+  brightness.value = new_value
+  awful.spawn("brightnessctl set " .. new_value .. "%", false)
+end)
+
+-- Volume
+local volume = wibox.widget {
+  widget = wibox.widget.slider,
+  value = 50,
+  maximum = 100,
+  forced_width = dpi(300),
+  shape = gears.shape.rounded_bar,
+  bar_shape = gears.shape.rounded_bar,
+  bar_color = beautiful.fg_normal .. '1a',
+  bar_margins = { bottom = dpi(20), top = dpi(20) },
+  bar_active_color = beautiful.fg_normal,
+  handle_width = dpi(16),
+  handle_shape = gears.shape.circle,
+  handle_color = beautiful.bg_normal,
+  handle_border_width = 2,
+  handle_border_color = beautiful.fg_normal
+}
+-- 音
+local volume_icon = wibox.widget {
+  widget = wibox.widget.textbox,
+  markup = helpers.colorizeText("音", beautiful.fg_normal),
+  font = beautiful.icon_alt .. " 16",
+  align = "center",
+  valign = "center"
+}
+
+local volume_text = wibox.widget {
+  widget = wibox.widget.textbox,
+  markup = helpers.colorizeText("10%", beautiful.fg_normal),
+  font = beautiful.font_nerd .. " 13",
+  align = "center",
+  valign = "center"
+}
+
+local volume_init = wibox.widget {
+  volume_icon,
+  volume,
+  volume_text,
+  layout = wibox.layout.fixed.horizontal,
+  forced_height = dpi(42),
+  spacing = dpi(17)
+}
+
+awful.spawn.easy_async_with_shell("amixer get Master | tail -n 1 | awk '{print $5}' | tr -d '[%]'",
+  function(stdout)
+    local value = string.gsub(stdout, '^%s*(.-)%s*$', '%1')
+    volume.value = tonumber(value)
+    volume_text.markup = helpers.colorizeText(value .. "%", beautiful.fg_normal)
+  end)
+
+volume:connect_signal("property::value", function(_, new_value)
+  volume_text.markup = helpers.colorizeText(new_value .. "%", beautiful.fg_normal)
+  volume.value = new_value
+  awful.spawn("amixer set Master " .. new_value .. "%", false)
+end)
+
+return wibox.widget {
+  {
+    bright_init,
+    volume_init,
+    spacing = dpi(0),
+    layout = wibox.layout.fixed.vertical,
+  },
+  margins = { top = dpi(0), bottom = dpi(4), left = dpi(4), right = dpi(4) },
+  widget = wibox.container.margin
+}

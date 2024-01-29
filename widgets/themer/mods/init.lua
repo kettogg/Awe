@@ -1,4 +1,4 @@
-return{
+return {
     colors   = require(... .. '.colors'),
     switcher = require(... .. '.switcher'),
     header   = require(... .. '.header'),

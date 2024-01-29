@@ -49,7 +49,7 @@ local gears = require('gears')
 local function volume_emit()
   awful.spawn.easy_async_with_shell(
     "bash -c 'pamixer --get-volume'", function(stdout)
-      local volume_int = tonumber(stdout)             -- integer
+      local volume_int = tonumber(stdout)               -- integer
       awesome.emit_signal('signal::volume', volume_int) -- integer
     end)
 end

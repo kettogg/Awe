@@ -1,7 +1,8 @@
-local wibox = require("wibox")
-local helpers = require("helpers")
+local wibox     = require("wibox")
+local helpers   = require("helpers")
 local beautiful = require("beautiful")
-local awful = require("awful")
+local awful     = require("awful")
+local dpi       = beautiful.xresources.apply_dpi
 
 return function()
 	local profile = wibox.widget {
@@ -12,9 +13,9 @@ return function()
 		clip_shape = helpers.rrect(45),
 		resize = true,
 		buttons = {
-		  awful.button({}, 1, function()
-		    awesome.emit_signal('toggle::launcher')
-		  end)
+			awful.button({}, 1, function()
+				awesome.emit_signal('toggle::launcher')
+			end)
 		},
 	}
 	return profile

@@ -1,163 +1,116 @@
 local awful         = require('awful')
 local hotkeys_popup = require('awful.hotkeys_popup')
 require('awful.hotkeys_popup.keys')
-local menubar          = require('menubar')
+local apps       = require('config.apps')
+local mod        = require('bindings.mod')
+local screenshot = require('script.screenshot')
+local gears      = require('gears')
+local gfs        = gears.filesystem
+local config_dir = gfs.get_configuration_dir()
 
-local apps             = require('config.apps')
-local mod              = require('bindings.mod')
-local widgets          = require('widgets')
-local screenshot       = require('script.screenshot')
-local calendar         = require('widgets.calendar')
-local control          = require('widgets.control')
-local quiklinks        = require('widgets.quiklinks')
-local capturer         = require('widgets.capturer.init')
-local gears            = require('gears')
-local gfs              = gears.filesystem
-local config_dir       = gfs.get_configuration_dir()
+local volume     = require("lib.volume")
+local brightness = require("lib.brightness")
 
-local volume           = require("lib.volume")
-local brightness       = require("lib.brightness")
-
-menubar.utils.terminal = apps.terminal
-
--- general awesome keys
+-- General awesome keys
 awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super },
     key         = 's',
-    description = 'show help',
+    description = 'Show Help',
     group       = 'awesome',
     on_press    = hotkeys_popup.show_help
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'w',
-    description = 'show main menu',
+    description = 'Show Laucher',
     group       = 'awesome',
-    on_press    = function() widgets.menu.mainmenu:show() end
+    on_press    = function() awesome.emit_signal('toggle::launcher') end
   },
   awful.key {
     modifiers   = { mod.super, mod.ctrl },
     key         = 'r',
-    description = 'reload awesome',
+    description = 'Reload Awesome',
     group       = 'awesome',
     on_press    = awesome.restart
   },
   -- awful.key {
   --    modifiers   = { mod.super, mod.shift },
   --    key         = 'q',
-  --    description = 'quit awesome',
+  --    description = 'Quit Awesome',
   --    group       = 'awesome',
   --    on_press    = awesome.quit
   -- },
   awful.key {
     modifiers   = { mod.super },
     key         = 'Return',
-    description = 'open a terminal',
+    description = 'Open Terminal',
     group       = 'launcher',
     on_press    = function() awful.spawn(apps.terminal) end
   },
   awful.key {
     modifiers   = { mod.super, mod.ctrl },
     key         = 'Return',
-    description = 'open a terminal(floating)',
+    description = 'Open Terminal(Floating)',
     group       = 'launcher',
     on_press    = function() awful.spawn(apps.terminal, { floating = true }) end
-  },
-  awful.key {
-    modifiers   = { mod.super, mod.shift },
-    key         = 'd',
-    description = 'open passord manager on rofi',
-    group       = 'launcher',
-    on_press    = function() awful.spawn("rofi-rbw --no-help") end
-  },
-  awful.key {
-    modifiers   = { mod.super },
-    key         = 'p',
-    description = 'show the menubar',
-    group       = 'launcher',
-    on_press    = function() menubar.show() end
   },
 
   -- Widgets
   awful.key {
-    modifiers   = { mod.super, mod.shift },
-    key         = 'c',
-    description = 'Calendar',
-    group       = 'launcher',
-    on_press    = function() calendar:show() end
-  },
-
-  awful.key {
-    modifiers   = { mod.super },
-    key         = 'c',
-    description = 'Show controlCenter',
-    group       = 'launcher',
-    on_press    = function() control:show() end
-  },
-
-  awful.key {
-    modifiers   = { mod.super },
-    key         = 'l',
-    description = 'Show Quiklinks',
-    group       = 'launcher',
-    on_press    = function() quiklinks:show() end
-  },
-
-  awful.key {
     modifiers   = { mod.super },
     key         = 't',
-    description = 'Show Tools',
+    description = 'Show Screenshot Tool',
     group       = 'launcher',
-    on_press    = function() capturer:show() end
+    on_press    = function() awesome.emit_signal("toggle::scrotter") end
   }
 }
 
--- tags related keybindings
+-- Tags related keybindings
 awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super },
     key         = 'Left',
-    description = 'view preivous',
+    description = 'View Previous',
     group       = 'tag',
     on_press    = awful.tag.viewprev
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'Right',
-    description = 'view next',
+    description = 'View Next',
     group       = 'tag',
     on_press    = awful.tag.viewnext
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'Escape',
-    description = 'go back',
+    description = 'Go Back',
     group       = 'tag',
     on_press    = awful.tag.history.restore
   }
 }
 
--- focus related keybindings
+-- Focus related keybindings
 awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super },
     key         = 'j',
-    description = 'focus next by index',
+    description = 'Focus next by index',
     group       = 'client',
     on_press    = function() awful.client.focus.byidx(1) end
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'k',
-    description = 'focus previous by index',
+    description = 'Focus previous by index',
     group       = 'client',
     on_press    = function() awful.client.focus.byidx(-1) end
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'Tab',
-    description = 'go back',
+    description = 'Go back',
     group       = 'client',
     on_press    = function()
       awful.client.focus.history.previous()
@@ -169,14 +122,14 @@ awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super, mod.ctrl },
     key         = 'j',
-    description = 'focus the next screen',
+    description = 'Focus the next screen',
     group       = 'screen',
     on_press    = function() awful.screen.focus_relative(1) end
   },
   awful.key {
     modifiers   = { mod.super, mod.ctrl },
     key         = 'n',
-    description = 'restore minimized',
+    description = 'Restore minimized',
     group       = 'client',
     on_press    = function()
       local c = awful.client.restore()
@@ -187,96 +140,96 @@ awful.keyboard.append_global_keybindings {
   }
 }
 
--- layout related keybindings
+-- Layout related keybindings
 awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super, mod.shift },
     key         = 'j',
-    description = 'swap with next client by index',
+    description = 'Swap with next client by index',
     group       = 'client',
     on_press    = function() awful.client.swap.byidx(1) end
   },
   awful.key {
     modifiers   = { mod.super, mod.shift },
     key         = 'k',
-    description = 'swap with previous client by index',
+    description = 'Swap with previous client by index',
     group       = 'client',
     on_press    = function() awful.client.swap.byidx(-1) end
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'u',
-    description = 'jump to urgent client',
+    description = 'Jump to urgent client',
     group       = 'client',
     on_press    = awful.client.urgent.jumpto
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'l',
-    description = 'increase master width factor',
+    description = 'Increase master width factor',
     group       = 'layout',
     on_press    = function() awful.tag.incmwfact(0.05) end
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'h',
-    description = 'decrease master width factor',
+    description = 'Decrease master width factor',
     group       = 'layout',
     on_press    = function() awful.tag.incmwfact(-0.05) end
   },
   awful.key {
     modifiers   = { mod.super, mod.shift },
     key         = 'h',
-    description = 'increase the number of master clients',
+    description = 'Increase the number of master clients',
     group       = 'layout',
     on_press    = function() awful.tag.incnmaster(1, nil, true) end
   },
   awful.key {
     modifiers   = { mod.super, mod.shift },
     key         = 'l',
-    description = 'decrease the number of master clients',
+    description = 'Decrease the number of master clients',
     group       = 'layout',
     on_press    = function() awful.tag.incnmaster(-1, nil, true) end
   },
   awful.key {
     modifiers   = { mod.super, mod.alt },
     key         = 'k',
-    description = 'increase client width factor',
+    description = 'Increase client width factor',
     group       = 'layout',
     on_press    = function() awful.client.incwfact(0.05) end
   },
   awful.key {
     modifiers   = { mod.super, mod.alt },
     key         = 'j',
-    description = 'decrease client width factor',
+    description = 'Decrease client width factor',
     group       = 'layout',
     on_press    = function() awful.client.incwfact(-0.05) end
   },
   awful.key {
     modifiers   = { mod.super, mod.ctrl },
     key         = 'h',
-    description = 'increase the number of columns',
+    description = 'Increase the number of columns',
     group       = 'layout',
     on_press    = function() awful.tag.incnmaster(1, nil, true) end
   },
   awful.key {
     modifiers   = { mod.super, mod.ctrl },
     key         = 'l',
-    description = 'decrease the number of columns',
+    description = 'Decrease the number of columns',
     group       = 'layout',
     on_press    = function() awful.tag.incnmaster(-1, nil, true) end
   },
   awful.key {
     modifiers   = { mod.super },
     key         = 'space',
-    description = 'select next',
+    description = 'Select Next',
     group       = 'layout',
     on_press    = function() awful.layout.inc(1) end
   },
   awful.key {
     modifiers   = { mod.super, mod.shift },
     key         = 'space',
-    description = 'select previous',
+    description = 'Select Previous',
     group       = 'layout',
     on_press    = function() awful.layout.inc(-1) end
   }
@@ -286,7 +239,7 @@ awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super },
     keygroup    = 'numrow',
-    description = 'only view tag',
+    description = 'Only view tag',
     group       = 'tag',
     on_press    = function(index)
       local screen = awful.screen.focused()
@@ -299,7 +252,7 @@ awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super, mod.ctrl },
     keygroup    = 'numrow',
-    description = 'toggle tag',
+    description = 'Toggle tag',
     group       = 'tag',
     on_press    = function(index)
       local screen = awful.screen.focused()
@@ -312,7 +265,7 @@ awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super, mod.shift },
     keygroup    = 'numrow',
-    description = 'move focused client to tag',
+    description = 'Move focused client to tag',
     group       = 'tag',
     on_press    = function(index)
       if client.focus then
@@ -326,7 +279,7 @@ awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super, mod.ctrl, mod.shift },
     keygroup    = 'numrow',
-    description = 'toggle focused client on tag',
+    description = 'Toggle focused client on tag',
     group       = 'tag',
     on_press    = function(index)
       if client.focus then
@@ -340,7 +293,7 @@ awful.keyboard.append_global_keybindings {
   awful.key {
     modifiers   = { mod.super },
     keygroup    = 'numpad',
-    description = 'select layout directrly',
+    description = 'Select layout directly',
     group       = 'layout',
     on_press    = function(index)
       local tag = awful.screen.focused().selected_tag
@@ -350,7 +303,7 @@ awful.keyboard.append_global_keybindings {
     end
   },
 
-  -- screenshot
+  -- Screenshot
   awful.key {
     modifiers   = { mod.super },
     key         = 'Print',
@@ -372,16 +325,12 @@ awful.keyboard.append_global_keybindings {
     group       = 'miscelaneous',
     on_press    = screenshot.selection
   },
-  awful.key({ mod.super, }, "q",
-    function(c)
-      awesome.emit_signal("toggle::scrotter")
-    end),
 
-  --color picker
+  -- Color picker
   awful.key {
     modifiers   = { mod.super },
     key         = 'o',
-    description = 'takes color picker',
+    description = 'Takes Color Picker',
     group       = 'miscelaneous',
     on_press    = function() awful.spawn(config_dir .. 'script/xcolor-pick') end
   },

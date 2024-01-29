@@ -1,5 +1,4 @@
 local awful = require('awful')
-
 local mod   = require('bindings.mod')
 
 client.connect_signal('request::default_keybindings', function()
@@ -7,7 +6,7 @@ client.connect_signal('request::default_keybindings', function()
       awful.key {
          modifiers   = { mod.super },
          key         = 'f',
-         description = 'toggle fullscreen',
+         description = 'Toggle Fullscreen',
          group       = 'client',
          on_press    = function(c)
             c.fullscreen = not c.fullscreen
@@ -17,49 +16,49 @@ client.connect_signal('request::default_keybindings', function()
       awful.key {
          modifiers   = { mod.super },
          key         = 'q',
-         description = 'close',
+         description = 'Close',
          group       = 'client',
          on_press    = function(c) c:kill() end
       },
       awful.key {
          modifiers   = { mod.super, mod.ctrl },
          key         = 'space',
-         description = 'toggle floating',
+         description = 'Toggle Floating',
          group       = 'client',
          on_press    = awful.client.floating.toggle
       },
       awful.key {
          modifiers   = { mod.super, mod.ctrl },
          key         = 'Return',
-         description = 'move to master',
+         description = 'Move To Master',
          group       = 'client',
          on_press    = function(c) c:swap(awful.client.getmaster()) end
       },
       awful.key {
          modifiers   = { mod.super },
          key         = 'o',
-         description = 'move to screen',
+         description = 'Move To Screen',
          group       = 'client',
          on_press    = function(c) c:move_to_screen() end
       },
       awful.key {
          modifiers   = { mod.super },
          key         = 't',
-         description = 'toggle keep on top',
+         description = 'Toggle Keep On Top',
          group       = 'client',
          on_press    = function(c) c.ontop = not c.ontop end
       },
       awful.key {
          modifiers   = { mod.super },
          key         = 'n',
-         description = 'minimize',
+         description = 'Minimize',
          group       = 'client',
-         on_press    = function(c) c.minimized  = true end
+         on_press    = function(c) c.minimized = true end
       },
       awful.key {
          modifiers   = { mod.super },
          key         = 'm',
-         description = '(un)maximize',
+         description = '(Un)Maximize',
          group       = 'client',
          on_press    = function(c)
             c.maximized = not c.maximized
@@ -69,7 +68,7 @@ client.connect_signal('request::default_keybindings', function()
       awful.key {
          modifiers   = { mod.super, mod.ctrl },
          key         = 'm',
-         description = '(un)maximize vertically',
+         description = '(Un)Maximize Vertically',
          group       = 'client',
          on_press    = function(c)
             c.maximized_vertical = not c.maximized_vertical
@@ -79,7 +78,7 @@ client.connect_signal('request::default_keybindings', function()
       awful.key {
          modifiers   = { mod.super, mod.shift },
          key         = 'm',
-         description = '(un)maximize horizontally',
+         description = '(Un)Maximize Horizontally',
          group       = 'client',
          on_press    = function(c)
             c.maximized_horizontal = not c.maximized_horizontal

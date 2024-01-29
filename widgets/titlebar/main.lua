@@ -4,16 +4,13 @@ local gears         = require('gears')
 local beautiful     = require('beautiful')
 local dpi           = beautiful.xresources.apply_dpi
 local animation     = require("modules.animation")
-local colors        = require('widgets.titlebar.colors')
-
 local helpers       = require('helpers')
 
 local width_buttons = 12
 
-
 -- Circular buttons
 -------------------
-local mkbutton = function(width, color, onclick)
+local mkbutton      = function(width, color, onclick)
   return function(c)
     local button = wibox.widget {
       wibox.widget.textbox(),
@@ -26,11 +23,11 @@ local mkbutton = function(width, color, onclick)
       widget        = wibox.container.background
     }
 
-    local color_transition = helpers.apply_transition {
+    local color_transition = helpers.applyTransition {
       element = button,
       prop    = 'bg',
       bg      = color,
-      hbg     = colors.titlebar_fg_normal,
+      hbg     = beautiful.bg_light,
     }
 
     client.connect_signal('property::active', function()
@@ -66,15 +63,15 @@ local mkbutton = function(width, color, onclick)
   end
 end
 
-local close = mkbutton(width_buttons, colors.red, function(c)
+local close         = mkbutton(width_buttons, beautiful.red, function(c)
   c:kill()
 end)
 
-local maximize = mkbutton(width_buttons, colors.blue, function(c)
+local maximize      = mkbutton(width_buttons, beautiful.blue, function(c)
   c.maximized = not c.maximized
 end)
 
-local minimize = mkbutton(width_buttons, colors.magenta, function(c)
+local minimize      = mkbutton(width_buttons, beautiful.magenta, function(c)
   gears.timer.delayed_call(function()
     c.minimized = not c.minimized
   end)
@@ -97,18 +94,18 @@ return function(c)
   n_titlebar.widget = {
     {
       {
-        {         -- Start
+        { -- Start
           close(c),
           maximize(c),
           minimize(c),
-          spacing = dpi(6),
+          spacing = dpi(5),
           layout  = wibox.layout.fixed.horizontal
         },
-        {         -- Middle
+        { -- Middle
           buttons = buttons,
           layout  = wibox.layout.fixed.horizontal
         },
-        {         -- End
+        { -- End
           --sticky(c),
           spacing = dpi(10),
           layout  = wibox.layout.fixed.horizontal

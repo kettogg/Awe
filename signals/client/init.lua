@@ -2,16 +2,16 @@ require('awful.autofocus')
 
 -- Focus client on hover.
 client.connect_signal('mouse::enter', function(c)
-   c:activate { context = 'mouse_enter', raise = false }
+  c:activate { context = 'mouse_enter', raise = false }
 end)
 
 client.connect_signal('request::titlebars', function(c)
-   -- Don't show titlebars on clients that explictly request not to
-   -- have them, like the Steam client or many fullscreen apps, for
-   -- example.
-   if c.requests_no_titlebar then return end
-   
-   require('widgets.titlebar').main(c)
+  -- Don't show titlebars on clients that explictly request not to
+  -- have them, like the Steam client or many fullscreen apps, for
+  -- example.
+  if c.requests_no_titlebar then return end
+
+  require('widgets.titlebar').main(c)
 end)
 
 -- Floating windows always on top.

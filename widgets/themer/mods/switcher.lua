@@ -1,15 +1,14 @@
-local awful      = require("awful")
-local helpers    = require("helpers")
-local wibox      = require("wibox")
-local gears      = require("gears")
-local beautiful  = require("beautiful")
-local colors     = require('widgets.themer.mods.colors')
-local dpi        = beautiful.xresources.apply_dpi
-local scheme     = require('config.user').colorscheme
-local gfs        = gears.filesystem
-local asset_path = gfs.get_configuration_dir() .. 'theme/assets/'
+local awful     = require("awful")
+local helpers   = require("helpers")
+local wibox     = require("wibox")
+local gears     = require("gears")
+local beautiful = require("beautiful")
+local colors    = require('widgets.themer.mods.colors')
+local dpi       = beautiful.xresources.apply_dpi
+local scheme    = require('config.user').colorscheme
+local gfs       = gears.filesystem
 
-local themes     = {
+local themes    = {
   'everblush',
   'everforest',
   'tokyonight',
@@ -36,9 +35,9 @@ local themes     = {
   'tsuki'
 }
 
-local index      = helpers.indexOf(themes, scheme)
+local index     = helpers.indexOf(themes, scheme)
 
-local M          = {
+local M         = {
   current = scheme,
   colors = {
     red = colors.red,
@@ -244,7 +243,6 @@ M.widget = wibox.widget {
 
 M:getColors(scheme)
 M:setColors()
-
 
 -- local bg_title = M.widget:get_children_by_id("bg_title")[1]
 -- local name = M.widget:get_children_by_id("name")[1]

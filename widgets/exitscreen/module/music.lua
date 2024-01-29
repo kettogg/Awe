@@ -1,5 +1,4 @@
 local wibox     = require("wibox")
-local awful     = require("awful")
 local beautiful = require("beautiful")
 local dpi       = require("beautiful").xresources.apply_dpi
 local gears     = require("gears")
@@ -8,7 +7,7 @@ local helpers   = require("helpers")
 local playerctl = pctl.lib()
 
 local art       = wibox.widget {
-  image = helpers.crop_surface(1, gears.surface.load_uncached(beautiful.songdefpicture_alt)),
+  image = helpers.cropSurface(1, gears.surface.load_uncached(beautiful.songdefpicture_alt)),
   forced_height = dpi(45),
   clip_shape = helpers.rrect(45),
   forced_width = dpi(45),
@@ -46,7 +45,7 @@ playerctl:connect_signal("metadata", function(_, title, artist, album_path, albu
     artist = string.sub(artist, 0, 22) .. "..."
   end
   songname:set_markup_silently(helpers.colorizeText(title or "NO", beautiful.fg_normal))
-  art:set_image(helpers.crop_surface(1, gears.surface.load_uncached(album_path)))
+  art:set_image(helpers.cropSurface(1, gears.surface.load_uncached(album_path)))
 end)
 
 return widget

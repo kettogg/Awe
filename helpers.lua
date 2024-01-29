@@ -1,5 +1,4 @@
 -- Useful functions used throughout the configuration
-
 local gears      = require('gears')
 local color      = require('modules.color')
 local rubato     = require('modules.rubato')
@@ -15,8 +14,8 @@ local _F         = {}
 -- https://github.com/Crylia/crylia-theme/blob/main/awesome/src/tools/icon_handler.lua
 local icon_cache = {}
 -- Define a default icon.
-_F.DEFAULT_ICON  = '/usr/share/icons/Papirus-Dark/128x128/apps/application-default-icon.svg'
-function _F.get_icon(theme, client, program_string, class_string)
+_F.DEFAULT_ICON  = '/home/re1san/.local/share/icons/Reversal-black-dark/apps/scalable/application-default-icon.svg'
+function _F.getIcon(theme, client, program_string, class_string)
    client = client or nil
    program_string = program_string or nil
    class_string = class_string or nil
@@ -92,7 +91,7 @@ end
 -- Blyaticon's image cropping function, uses a cairo surface
 -- which it crops to a ratio.
 -- https://git.gemia.net/paul.s/homedots/-/blob/main/awesome/helpers.lua#L133
-function _F.crop_surface(ratio, surf)
+function _F.cropSurface(ratio, surf)
    local old_w, old_h = gears.surface.get_size(surf)
    local old_ratio    = old_w / old_h
    if old_ratio == ratio then return surf end
@@ -120,7 +119,7 @@ end
 
 -- Applies the blur effect to the titlebar buttons lose focus
 
-function _F.apply_transition(opts)
+function _F.applyTransition(opts)
    opts                   = opts or {}
    local bg               = opts.bg or beautiful.bg_light
    local hbg              = opts.hbg or beautiful.mid_normal
@@ -158,26 +157,27 @@ end
 function _F.rrect(radius)
    radius = radius or dpi(4)
    return function(cr, width, height)
-     gears.shape.rounded_rect(cr, width, height, radius)
+      gears.shape.rounded_rect(cr, width, height, radius)
    end
 end
 
 function _F.colorizeText(txt, fg)
    if fg == "" then
-     fg = "#ffffff"
+      fg = "#ffffff"
    end
    return "<span foreground='" .. fg .. "'>" .. txt .. "</span>"
 end
 
+-- Idk why I made this when you can just use gc.recolor_image()
 function _F.colorizeSvg(filePath, newColor)
    local file = io.open(filePath, "r")
-   local svgString = file:read("*a")  -- Read the entire file as a string
+   local svgString = file:read("*a") -- Read the entire file as a string
    file:close()
 
    local pattern = 'fill="#%x+"'
    local replacement = 'fill="' .. newColor .. '"'
    local newSvgString = svgString:gsub(pattern, replacement)
-   
+
    local file = io.open(filePath, "w")
    file:write(newSvgString)
    file:close()
@@ -187,4 +187,10 @@ end
 function _F.gc(widget, id)
    return widget:get_children_by_id(id)[1]
 end
+
+function _F.getUserName()
+   local name = os.getenv("USER") or os.getenv("USERNAME")
+   return name
+end
+
 return _F

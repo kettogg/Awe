@@ -8,13 +8,6 @@ local helpers   = require("helpers")
 local animation = require("modules.animation")
 local dpi       = beautiful.xresources.apply_dpi
 
-local username -- Needed for /home/<username>/.local/bin/
-awful.spawn.easy_async_with_shell(
-  'whoami', function(stdout)
-    username = stdout
-  end
-)
-
 awful.screen.connect_for_each_screen(function(s)
   local launcherdisplay = wibox {
     width = dpi(520),
@@ -26,7 +19,7 @@ awful.screen.connect_for_each_screen(function(s)
   }
   local prompt = wibox.widget {
     {
-      image = helpers.crop_surface(2.758, gears.surface.load_uncached(beautiful.wallpaper)), -- pass the ratio here width/height
+      image = helpers.cropSurface(2.758, gears.surface.load_uncached(beautiful.wallpaper)), -- pass the ratio here width/height
       opacity = 0.9,
       forced_height = dpi(174),
       clip_shape = helpers.rrect(4),
@@ -126,7 +119,7 @@ awful.screen.connect_for_each_screen(function(s)
         --   {
         --     {
         --       widget = wibox.widget.imagebox,
-        --       image = beautiful.nix,
+        --       image = beautiful.avatar,
         --       forced_height = 45,
         --       forced_width = 45,
         --       resize = true,
@@ -141,13 +134,12 @@ awful.screen.connect_for_each_screen(function(s)
         {
           {
             createPowerButton("", beautiful.red .. 'dd', "poweroff"),
-            createPowerButton("", beautiful.blue .. 'dd', "/home/re1san/.local/bin/lock"),
+            createPowerButton("", beautiful.blue .. 'dd', "/home/" .. helpers.getUserName() .. "/.local/bin/lock"),
             createPowerButton("", beautiful.green .. 'dd', "reboot"),
             spacing = 10,
             layout = wibox.layout.fixed.vertical,
           },
           widget = wibox.container.margin,
-          -- margins = 10,
           bottom = dpi(19),
         },
         layout = wibox.layout.align.vertical
@@ -173,8 +165,8 @@ awful.screen.connect_for_each_screen(function(s)
     spacing = 0,
     layout = wibox.layout.align.horizontal
   }
-  -- Functions
 
+  -- Functions
   local function next(entries)
     if index_entry ~= #filtered then
       index_entry = index_entry + 1
@@ -208,7 +200,6 @@ awful.screen.connect_for_each_screen(function(s)
             path = p
           end
         end
-        -- print(path)
         table.insert(
           entries,
           { name = name, appinfo = entry, icon = path or '' }
@@ -317,7 +308,8 @@ awful.screen.connect_for_each_screen(function(s)
     "Down",
     "Up",
     "Left",
-    "Right"
+    "Right",
+    "Print"
   }
   local function has_value(tab, val)
     for _, value in ipairs(tab) do
@@ -387,7 +379,6 @@ awful.screen.connect_for_each_screen(function(s)
     -- Prompt
     awesome.emit_signal("toggle::search")
   end
-
 
   awesome.connect_signal("quit::launcher", function()
     launcherdisplay.visible = false

@@ -4,7 +4,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local animation = require("modules.animation")
 
--- osd --
+-- OSD --
 
 local info = wibox.widget {
   widget = wibox.container.margin,
@@ -61,10 +61,10 @@ local anim = animation:new {
   end,
 }
 
--- volume --
+-- Volume --
 
 
--- bright --
+-- Bright --
 
 awesome.connect_signal("signal::brightness", function(value)
   anim:set(value)
@@ -80,7 +80,7 @@ awesome.connect_signal("signal::brightness", function(value)
   end
 end)
 
--- function --
+-- Function --
 
 local function osd_hide()
   osd.visible = false

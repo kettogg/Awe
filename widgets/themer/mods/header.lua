@@ -1,13 +1,9 @@
-local awful      = require("awful")
-local wibox      = require("wibox")
-local gears      = require("gears")
-local beautiful  = require("beautiful")
-local colors     = require('widgets.themer.mods.colors')
-local dpi        = beautiful.xresources.apply_dpi
-local gfs        = gears.filesystem
-local asset_path = gfs.get_configuration_dir() .. 'theme/assets/tools/'
-local capturer   = require('widgets.capturer.init')
-
+local awful         = require("awful")
+local wibox         = require("wibox")
+local gears         = require("gears")
+local beautiful     = require("beautiful")
+local colors        = require('widgets.themer.mods.colors')
+local dpi           = beautiful.xresources.apply_dpi
 
 local profile_image = wibox.widget {
 	{
@@ -20,7 +16,7 @@ local profile_image = wibox.widget {
 	widget        = wibox.container.background
 }
 
-local username = wibox.widget {
+local username      = wibox.widget {
 	markup = '',
 	font   = beautiful.font_sans .. ' 13',
 	align  = 'left',
@@ -44,7 +40,6 @@ return wibox.widget {
 		{
 			{
 				profile_image,
-
 				{
 					{
 

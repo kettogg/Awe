@@ -1,26 +1,24 @@
-local wibox = require("wibox")
-local helpers = require("helpers")
-local awful = require("awful")
-local beautiful = require("beautiful")
-local gears = require("gears")
-local lgi = require('lgi')
-local Gtk = lgi.require('Gtk', '3.0')
-local Gdk = lgi.require('Gdk', '3.0')
-local GdkPixbuf = lgi.GdkPixbuf
-local dpi = beautiful.xresources.apply_dpi
+local wibox        = require("wibox")
+local helpers      = require("helpers")
+local awful        = require("awful")
+local beautiful    = require("beautiful")
+local lgi          = require('lgi')
+local Gtk          = lgi.require('Gtk', '3.0')
+local Gdk          = lgi.require('Gdk', '3.0')
+local GdkPixbuf    = lgi.GdkPixbuf
 
-local delay = tostring(1) .. " "
-local clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+local delay        = tostring(1) .. " "
+local clipboard    = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 
-local getName = function()
+local getName      = function()
   local string = "~/Pictures/Screenshots/" .. os.date("%d-%m-%Y-%H:%M:%S") .. ".jpg"
   string = string:gsub("~", os.getenv("HOME"))
   return string
 end
 
-local defCommand = "maim " .. "-d " .. delay
+local defCommand   = "maim " .. "-d " .. delay
 
-local copyScrot = function(path)
+local copyScrot    = function(path)
   local image = GdkPixbuf.Pixbuf.new_from_file(path)
   clipboard:set_image(image)
   clipboard:store()
@@ -30,7 +28,6 @@ local createButton = function(icon, name, fn, col)
   return wibox.widget {
     {
       {
-        -- {
         {
           font = beautiful.icon .. " 40",
           markup = helpers.colorizeText(icon, col),
@@ -40,10 +37,6 @@ local createButton = function(icon, name, fn, col)
         },
         widget = wibox.container.margin,
         margins = { left = 25, right = 25 }
-        -- },
-        -- shape = helpers.rrect(2),
-        -- widget = wibox.container.background,
-        -- bg = beautiful.bg_light,
       },
       {
         font = beautiful.font_sans .. " 11",
@@ -62,7 +55,7 @@ local createButton = function(icon, name, fn, col)
   }
 end
 
-local fullscreen = createButton('', 'Fullscreen', function()
+local fullscreen   = createButton('', 'Fullscreen', function()
   local name = getName()
   local cmd = defCommand .. name
   awful.spawn.easy_async_with_shell(cmd, function()
@@ -70,7 +63,7 @@ local fullscreen = createButton('', 'Fullscreen', function()
   end)
 end, beautiful.green)
 
-local selection = createButton('', 'Selection', function()
+local selection    = createButton('', 'Selection', function()
   local name = getName()
   local cmd = "maim" .. " -s " .. name
   awful.spawn.easy_async_with_shell(cmd, function()
@@ -78,7 +71,7 @@ local selection = createButton('', 'Selection', function()
   end)
 end, beautiful.blue)
 
-local window = createButton('', 'Window', function()
+local window       = createButton('', 'Window', function()
   local name = getName()
   local cmd = "maim" .. " -i " .. client.focus.window .. " " .. name
   awful.spawn.with_shell(cmd)

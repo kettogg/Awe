@@ -7,7 +7,7 @@ local pctl      = require("modules.playerctl")
 local helpers   = require("helpers")
 local playerctl = pctl.lib()
 local art       = wibox.widget {
-  image = helpers.crop_surface(1.71, gears.surface.load_uncached(beautiful.songdefpicture)),
+  image = helpers.cropSurface(1.71, gears.surface.load_uncached(beautiful.songdefpicture)),
   opacity = 0.3,
   resize = true,
   clip_shape = helpers.rrect(12),
@@ -48,7 +48,8 @@ local play      = wibox.widget {
   },
 }
 playerctl:connect_signal("playback_status", function(_, playing, player_name)
-  play.markup = playing and helpers.colorizeText("󰏦", beautiful.fg_normal) or helpers.colorizeText("󰐍", beautiful.fg_normal)
+  play.markup = playing and helpers.colorizeText("󰏦", beautiful.fg_normal) or
+  helpers.colorizeText("󰐍", beautiful.fg_normal)
 end)
 local finalwidget = wibox.widget {
 
@@ -139,7 +140,7 @@ playerctl:connect_signal("metadata", function(_, title, artist, album_path, albu
   if string.len(artist) > 22 then
     artist = string.sub(artist, 0, 22) .. "..."
   end
-  art.image = helpers.crop_surface(1.71, gears.surface.load_uncached(album_path))
+  art.image = helpers.cropSurface(1.71, gears.surface.load_uncached(album_path))
   helpers.gc(finalwidget, "songname"):set_markup_silently(helpers.colorizeText(title or "NO", beautiful.fg_normal))
   helpers.gc(finalwidget, "artist"):set_markup_silently(helpers.colorizeText(artist or "HM", beautiful.fg_normal))
   helpers.gc(finalwidget, "player"):set_markup_silently(helpers.colorizeText("Playing Via: " .. player_name or "",

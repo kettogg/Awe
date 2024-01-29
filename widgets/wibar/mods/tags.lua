@@ -1,9 +1,8 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local helpers = require("helpers")
+local awful     = require("awful")
+local wibox     = require("wibox")
+local helpers   = require("helpers")
 local animation = require("modules.animation")
-local beautiful = require("beautiful")
+
 return function(s)
   local taglist = awful.widget.taglist {
     layout          = {

@@ -59,7 +59,7 @@ end
 function _W.image(n)
    return wibox.widget {
       widget        = wibox.widget.imagebox,
-      image         = n.icon and helpers.crop_surface(1, gears.surface.load_uncached(n.icon))
+      image         = n.icon and helpers.cropSurface(1, gears.surface.load_uncached(n.icon))
           or def_icon,
       resize        = true,
       halign        = 'center',

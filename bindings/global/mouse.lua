@@ -10,11 +10,11 @@ awful.mouse.append_global_mousebindings {
    awful.button {
       modifiers = {},
       button    = 4,
-      on_press  = awful.tag.viewprev
+      on_press  = awful.tag.viewnext
    },
    awful.button {
       modifiers = {},
       button    = 5,
-      on_press  = awful.tag.viewnext
+      on_press  = awful.tag.viewprev
    }
 }

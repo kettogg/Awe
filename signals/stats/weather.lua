@@ -1,14 +1,14 @@
-local awful = require("awful")
-local gears = require("gears")
-local filesystem = gears.filesystem
-local json = require("modules.json")
-local helpers = require("helpers")
-local icon_dir = filesystem.get_configuration_dir() .. "theme/assets/weather/icons/"
-local thumb_dir = filesystem.get_configuration_dir() .. "theme/assets/weather/images/"
+local awful            = require("awful")
+local gears            = require("gears")
+local filesystem       = gears.filesystem
+local json             = require("modules.json")
+local helpers          = require("helpers")
+local icon_dir         = filesystem.get_configuration_dir() .. "theme/assets/weather/icons/"
+local thumb_dir        = filesystem.get_configuration_dir() .. "theme/assets/weather/images/"
 
 local GET_FORECAST_CMD = [[bash -c "curl -s --show-error -X GET '%s'"]]
 
-local icon_map = {
+local icon_map         = {
   ["01d"] = "weather-clear-sky",
   ["02d"] = "weather-few-clouds",
   ["04d"] = "weather-few-clouds",

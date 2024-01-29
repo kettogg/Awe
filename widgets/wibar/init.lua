@@ -3,7 +3,6 @@ local wibox     = require('wibox')
 local beautiful = require('beautiful')
 local dpi       = beautiful.xresources.apply_dpi
 local helpers   = require('helpers')
--- local modules   = require(... .. '.module')
 local mods      = require(... .. '.mods')
 
 return function(s)

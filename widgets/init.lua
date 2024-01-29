@@ -1,12 +1,11 @@
 return {
-   launcher   = require(... .. '.launcher'),
-   menu       = require(... .. '.menu'),
    wibar      = require(... .. '.wibar'),
-   calendar   = require(... .. '.calendar'),
-   exitscreen = require(... .. '.exitscreen.init'),
+   menu       = require(... .. '.menu'),
    popups     = require(... .. '.popups'),
+   launcher   = require(... .. '.launcher'),
    themer     = require(... .. '.themer'),
    sysetting  = require(... .. '.sysetting'),
    lock       = require(... .. '.lock'),
-   -- notify     = require(... .. '.notify'), -- This is chadcat's notification popup
+   exitscreen = require(... .. '.exitscreen.init'),
+   -- notify     = require(... .. '.notify'), -- This is chadcat's notification popup, WIP
 }

@@ -193,8 +193,6 @@ return function(s)
   end
   makeImage()
 
-
-
   exit:setup {
     back,
     overlay,
