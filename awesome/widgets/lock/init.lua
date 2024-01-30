@@ -12,7 +12,7 @@ end
 local header    = wibox.widget {
   {
     {
-      image         = beautiful.avatar,
+      image         = beautiful.avatar_lock,
       clip_shape    = helpers.rrect(100),
       forced_height = 180,
       opacity       = 1,

@@ -62,6 +62,7 @@ end
 
 -- Logos/icons/avatar
 _T.avatar               = user.avatar ~= nil and user.avatar or assets_path .. "deez.jpg"
+_T.avatar_lock          = assets_path .. "lock.jpg"
 _T.palette              = gc.recolor_image(assets_path .. '/palette/palette.png', _T.fg_normal)
 _T.palette_alt          = gc.recolor_image(assets_path .. '/palette/rocket.png', _T.fg_normal)
 
