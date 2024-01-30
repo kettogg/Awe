@@ -16,7 +16,7 @@ awful.screen.connect_for_each_screen(function(s)
     shape = helpers.rrect(2),
     screen = s,
     width = 660,
-    height = 610,
+    height = 608,
     bg = beautiful.bg_normal .. "00",
     ontop = true,
     visible = false,
@@ -97,7 +97,7 @@ awful.screen.connect_for_each_screen(function(s)
         top = 20,
         left = 30,
         right = 30,
-        bottom = 40
+        bottom = 30
       },
       widget = wibox.container.background,
       bg = beautiful.bg_normal,
