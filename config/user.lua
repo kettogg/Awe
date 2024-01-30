@@ -18,7 +18,7 @@ return {
    -- FILE 'awesome/widgets/control_center/module/themer.lua',
    -- set_theme(' colourscheme = "' .. currTheme:gsub('"', '\\"') .. '",',line number,gfs.get_configuration_dir() ..
    -- "config/username.lua")
-   colorscheme = "oxocarbon",
+   colorscheme = "janleigh",
    
    -- Files
    -- You can comment the variable 'avatar' 'wallpaper', 

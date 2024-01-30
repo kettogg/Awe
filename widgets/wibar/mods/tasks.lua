@@ -4,7 +4,7 @@ local wibox     = require('wibox')
 local gears     = require('gears')
 local dpi       = beautiful.xresources.apply_dpi
 local buttons   = require('bindings.widgets.tasklist').buttons
-local colors    = require('widgets.wibar.module.colors')
+local colors    = require('widgets.wibar.mods.colors')
 
 return function(s)
    return awful.widget.tasklist {

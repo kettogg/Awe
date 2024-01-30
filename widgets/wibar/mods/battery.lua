@@ -5,8 +5,6 @@ local dpi                   = require('beautiful').xresources.apply_dpi
 local beautiful             = require('beautiful')
 local gfs                   = gears.filesystem
 local asset_path            = gfs.get_configuration_dir() .. 'theme/assets/battery/'
-local quiklinks             = require('widgets.quiklinks')
-local control   = require('widgets.control') -- Temporary
 
 -- Cute battery face indicator
 ------------------

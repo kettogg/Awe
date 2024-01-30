@@ -41,7 +41,7 @@
   <tbody>
     <tr>
       <td>
-        <a href="https://github.com/re1san/Awe"><img src=".github/2.png"></a>
+        <a href="https://github.com/re1san/Awe"><img src=".github/2.jpg"></a>
       </td>
     </tr>
   </tbody>

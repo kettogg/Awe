@@ -14,7 +14,7 @@ require('rules')
 require('signals')
 
 -- Load autoexecs
--- require('config.auto')
+require('config.auto')
 
 -- 🗑 Garbage Collector Settings
 require('gears').timer {
