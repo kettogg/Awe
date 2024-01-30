@@ -47,7 +47,7 @@ _T.icon_theme          = '/home/re1san/.local/share/icons/Reversal-black-dark'
 -- Hacky, bad, need to improve this. But doing it this way allows me to send the
 -- colors table to other programs.
 _T.wallpaper           = user.wallpaper or
-		gfs.get_configuration_dir() .. 'theme/colorscheme/' .. user.colorscheme .. '/0.png'
+		gfs.get_configuration_dir() .. 'theme/colorscheme/' .. user.colorscheme .. '/2.png'
 local def_icon         = assets_path .. 'awesome.svg'
 
 if user.avatar ~= nil then
