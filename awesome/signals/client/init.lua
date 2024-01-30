@@ -24,54 +24,54 @@ client.connect_signal('property::floating', function(c) c.ontop = c.floating end
 -- Send fullscreen windows to the top.
 client.connect_signal('property::fullscreen', function(c) c:raise() end)
 
--- Add rounder corners
-local function applyShape(draw, shape, ...)
-  local geo = draw:geometry()
-  local shape_args = ...
+-- Add rounder corners, DONE Using Picom NOW!
+-- local function applyShape(draw, shape, ...)
+--   local geo = draw:geometry()
+--   local shape_args = ...
 
-  local img = cairo.ImageSurface(cairo.Format.A1, geo.width, geo.height)
-  local cr = cairo.Context(img)
+--   local img = cairo.ImageSurface(cairo.Format.A1, geo.width, geo.height)
+--   local cr = cairo.Context(img)
 
-  cr:set_operator(cairo.Operator.CLEAR)
-  cr:set_source_rgba(0, 0, 0, 1)
-  cr:paint()
-  cr:set_operator(cairo.Operator.SOURCE)
-  cr:set_source_rgba(1, 1, 1, 1)
+--   cr:set_operator(cairo.Operator.CLEAR)
+--   cr:set_source_rgba(0, 0, 0, 1)
+--   cr:paint()
+--   cr:set_operator(cairo.Operator.SOURCE)
+--   cr:set_source_rgba(1, 1, 1, 1)
 
-  shape(cr, geo.width, geo.height, shape_args)
+--   shape(cr, geo.width, geo.height, shape_args)
 
-  cr:fill()
+--   cr:fill()
 
-  draw.shape_bounding = img._native
+--   draw.shape_bounding = img._native
 
-  cr:set_operator(cairo.Operator.CLEAR)
-  cr:set_source_rgba(0, 0, 0, 1)
-  cr:paint()
-  cr:set_operator(cairo.Operator.SOURCE)
-  cr:set_source_rgba(1, 1, 1, 1)
+--   cr:set_operator(cairo.Operator.CLEAR)
+--   cr:set_source_rgba(0, 0, 0, 1)
+--   cr:paint()
+--   cr:set_operator(cairo.Operator.SOURCE)
+--   cr:set_source_rgba(1, 1, 1, 1)
 
-  local border = beautiful.base_border_width
-  --local titlebar_height = titlebar.is_enabled(draw) and beautiful.titlebar_height or border
-  local titlebar_height = border
-  gears.shape.transform(shape):translate(
-    border, titlebar_height
-  )(
-        cr,
-        geo.width - border * 2,
-        geo.height - titlebar_height - border,
-        --shape_args
-        8
-      )
+--   local border = beautiful.base_border_width
+--   --local titlebar_height = titlebar.is_enabled(draw) and beautiful.titlebar_height or border
+--   local titlebar_height = border
+--   gears.shape.transform(shape):translate(
+--     border, titlebar_height
+--   )(
+--         cr,
+--         geo.width - border * 2,
+--         geo.height - titlebar_height - border,
+--         --shape_args
+--         8
+--       )
 
-  cr:fill()
+--   cr:fill()
 
-  draw.shape_clip = img._native
+--   draw.shape_clip = img._native
 
-  img:finish()
-end
+--   img:finish()
+-- end
 
-client.connect_signal("property::geometry", function(c)
-  if not c.fullscreen then
-    delayed_call(applyShape, c, gears.shape.rounded_rect, 4)
-  end
-end)
+-- client.connect_signal("property::geometry", function(c)
+--   if not c.fullscreen then
+--     delayed_call(applyShape, c, gears.shape.rounded_rect, 4)
+--   end
+-- end)

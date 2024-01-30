@@ -14,7 +14,8 @@ local autorunApps =
 {
   "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
   "redshift",
-  "picom",
+--  "picom",
+  "compfy --daemon",
   "xfce4-power-manager",
 }
 
