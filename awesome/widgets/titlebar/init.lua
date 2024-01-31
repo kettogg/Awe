@@ -1,3 +1,0 @@
-return {
-    main = require(... .. '.main')
-}
