@@ -1,6 +1,6 @@
 PREFIX = /usr
-DESTDIR ?=
-INSTALL_DIR ?= $(DESTDIR)$(PREFIX)/share/themes/Kizu
+DESTDIR ?= /home/re1san/.themes/Kizu
+INSTALL_DIR ?= $(DESTDIR)
 
 all:
 	npm install && npm run build

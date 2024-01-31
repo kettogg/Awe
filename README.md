@@ -14,7 +14,7 @@
 </div>
 
 > [!Note]
-> Messy dots.
+> Messy Dots ...
 
 <h3> Showcase </h3>
 
@@ -63,8 +63,9 @@
 
 <h3> Pkgs Needed </h3>
 
+For Arch Linux (Idk About Others) -
 ```
-awesome-git picom upower bluetoothctl brightnessctl wpctl alsa-utils(for amixer) networkmanager redshift pamixer uptime gpick imagemagick
+yay -S awesome-git compfy maim brightnessctl bluez bluez-utils wireplumber alsa-utils redshift pamixer imagemagick procps-ng gpick upower playerctl xfce-polkit xfce4-power-manager
 ```
 
 <h3> Credits </h3>
