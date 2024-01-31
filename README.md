@@ -1,5 +1,5 @@
 <div align="center">
-  <h1> Modular default AWM </h1>
+  <h1> Modular Default AWM </h1>
 </div>
 
 <div align="center">
@@ -9,3 +9,10 @@
 ![Cute](https://img.shields.io/badge/Pretty-Yes-c585cf?style=for-the-badge)
 ![GitHub Code Size](https://img.shields.io/github/languages/code-size/re1san/Awe?color=e1b56a&style=for-the-badge)
 ![GitHub Repo Stars](https://img.shields.io/github/stars/re1san/Awe?color=74be88&style=for-the-badge)
+
+</div>
+
+<h3> Credits </h3>
+
+* [Gw](https://github.com/Gwynsav)
+ 
