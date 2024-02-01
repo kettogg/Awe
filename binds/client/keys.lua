@@ -13,7 +13,7 @@ client.connect_signal('request::default_keybindings', function()
 				c:raise()
 			end, { description = 'Toggle Fullscreen', group = 'client' }),
 		awful.key({ modkey, }, 'q', function(c) c:kill() end,
-			{ description = 'close', group = 'client' }),
+			{ description = 'Close', group = 'client' }),
 		awful.key({ modkey, }, 'space', awful.client.floating.toggle,
 			{ description = 'Toggle Floating', group = 'client' }),
 		awful.key({ modkey, }, 'n',
@@ -21,7 +21,7 @@ client.connect_signal('request::default_keybindings', function()
 				-- The client currently has the input focus, so it cannot be
 				-- minimized, since minimized clients can't have the focus.
 				c.minimized = true
-			end, { description = 'minimize', group = 'client' }),
+			end, { description = 'Minimize', group = 'client' }),
 		awful.key({ modkey, }, 'm',
 			function(c)
 				c.maximized = not c.maximized

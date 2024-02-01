@@ -25,7 +25,7 @@ return function(c)
 		-- Middle
 		{
 			layout = wibox.layout.flex.horizontal,
-			{    -- Title
+			{ -- Title
 				widget = awful.titlebar.widget.titlewidget(c),
 				halign = 'center'
 			},

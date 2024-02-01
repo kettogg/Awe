@@ -7,23 +7,23 @@ pcall(require, 'luarocks.loader')
 local naughty = require('naughty')
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config).
-naughty.connect_signal('request::display_error', function(message, startup)
-  naughty.notification({
-    urgency = 'critical',
-    title   = 'Oops, an error happened' .. (startup and ' during startup!' or '!'),
-    message = message
-  })
-end)
+-- naughty.connect_signal('request::display_error', function(message, startup)
+--   naughty.notification({
+--     urgency = 'critical',
+--     title   = 'Oops, an error happened' .. (startup and ' during startup!' or '!'),
+--     message = message
+--   })
+-- end)
 
 -- Allow Awesome to automatically focus a client upon changing tags or loading.
 require('awful.autofocus')
 -- Enable hotkeys help widget for VIM and other apps when client with a matching
 -- name is opened:
-require('awful.hotkeys_popup.keys')
+--require('awful.hotkeys_popup.keys')
 
 -- Load the theme. In other words, defines the variables within the `beautiful`
 -- table.
-require('beautiful').init(require('theme'))
+require('theme')
 
 -- Treat all signals. Bear in mind this implies creating all tags, attaching
 -- their layouts, setting client behavior and loading UI.

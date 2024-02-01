@@ -14,7 +14,7 @@ menu.awesome     = {
 	-- config is meant to serve as an example to build your own environment upon.
 	{
 		'docs',
-		(os.getenv('BROWSER') or 'firefox') .. ' https://awesomewm.org/apidoc'
+		(os.getenv('BROWSER') or 'waterfox') .. ' https://awesomewm.org/apidoc'
 	},
 	{ 'edit config', apps.editor_cmd .. ' ' .. awesome.conffile },
 	{ 'restart',     awesome.restart },

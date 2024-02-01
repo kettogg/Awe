@@ -4,11 +4,11 @@ local wibox = require('wibox')
 local module = require(... .. '.module')
 
 return function(s)
-	s.mypromptbox = awful.widget.prompt()  -- Create a promptbox.
+	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
-		position = 'top',
+		position = 'bottom',
 		screen   = s,
 		widget   = {
 			layout = wibox.layout.align.horizontal,
@@ -24,9 +24,9 @@ return function(s)
 			-- Right widgets.
 			{
 				layout = wibox.layout.fixed.horizontal,
-				awful.widget.keyboardlayout(),     -- Keyboard map indicator and switcher.
+				awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
 				wibox.widget.systray(),
-				wibox.widget.textclock(),          -- Create a textclock widget.
+				wibox.widget.textclock(),  -- Create a textclock widget.
 				module.layoutbox(s)
 			}
 		}
