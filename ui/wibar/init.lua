@@ -2,7 +2,7 @@ local awful = require('awful')
 local wibox = require('wibox')
 
 local module = require(... .. '.module')
-
+local dpi    = require('beautiful.xresources').apply_dpi
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
 
@@ -10,6 +10,7 @@ return function(s)
 	s.mywibox = awful.wibar({
 		position = 'bottom',
 		screen   = s,
+    height   = dpi(40),
 		widget   = {
 			layout = wibox.layout.align.horizontal,
 			-- Left widgets.

@@ -23,7 +23,7 @@ require('awful.autofocus')
 
 -- Load the theme. In other words, defines the variables within the `beautiful`
 -- table.
-require('theme')
+require('beautiful').init(require('theme'))
 
 -- Treat all signals. Bear in mind this implies creating all tags, attaching
 -- their layouts, setting client behavior and loading UI.

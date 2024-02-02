@@ -14,8 +14,6 @@ awful.keyboard.append_global_keybindings({
 		hotkeys_popup.widget.new({
 			width = 1920,
 			height = 1080,
-			font = "Iosevka NF Bold 13",
-			description_font = "Iosevka NF Thin Italic 12",
 		}):show_help(nil, screen)
 	end, { description = 'Show Help', group = 'awesome' }),
 	awful.key({ modkey, }, 'w', function() widgets.menu.main:show() end,
