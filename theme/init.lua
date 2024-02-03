@@ -1,38 +1,62 @@
-local beautiful                              = require('beautiful')
-local theme_assets                           = require('beautiful.theme_assets')
-local dpi                                    = require('beautiful.xresources').apply_dpi
-local rnotification                          = require('ruled.notification')
-local gfs                                    = require('gears.filesystem')
-local user                                   = require('config.user')
-local asset_path                             = gfs.get_configuration_dir() .. 'theme/assets/'
-local def_assets                             = asset_path .. 'default/'
+local beautiful     = require('beautiful')
+local theme_assets  = require('beautiful.theme_assets')
+local dpi           = require('beautiful.xresources').apply_dpi
+local rnotification = require('ruled.notification')
+local gfs           = require('gears.filesystem')
+local user          = require('config.user')
+local asset_path    = gfs.get_configuration_dir() .. 'theme/assets/'
+local def_assets    = asset_path .. 'default/'
 
-local colors                                 = require('theme.colorscheme').colors
-local _T                                     = {}
+local colors        = require('theme.colorscheme').colors
+local _T            = {}
 
-_T.sans                                      = 'Satoshi 11'
-_T.nerd                                      = 'Iosevka NF'
+_T.sans             = 'Satoshi 11'
+_T.nerd             = 'Iosevka NF'
+_T.term             = 'Iosevka NFM'
+_T.wallpaper        = require('theme.colorscheme').wallpaper
+_T.icon_theme       = user.icons
 
-_T.wallpaper                                 = require('theme.colorscheme').wallpaper
-_T.icon_theme                                = user.icons
+-- Attach colors to _T
+_T.bg_dark          = colors.bg_dark
+_T.bg_normal        = colors.bg_normal
+_T.bg_light         = colors.bg_light
+_T.mid_dark         = colors.mid_dark
+_T.mid_normal       = colors.mid_normal
+_T.mid_light        = colors.mid_light
+_T.fg_dark          = colors.fg_dark
+_T.fg_normal        = colors.fg_normal
+_T.fg_light         = colors.fg_light
+_T.red              = colors.red
+_T.red_dark         = colors.red_dark
+_T.green            = colors.green
+_T.green_dark       = colors.green_dark
+_T.yellow           = colors.yellow
+_T.yellow_dark      = colors.yellow_dark
+_T.blue             = colors.blue
+_T.blue_dark        = colors.blue_dark
+_T.magenta          = colors.magenta
+_T.magenta_dark     = colors.magenta_dark
+_T.cyan             = colors.cyan
+_T.cyan_dark        = colors.cyan_dark
+
 
 _T.font                                      = _T.sans
-_T.bg_normal                                 = colors.bg_normal
-_T.bg_focus                                  = colors.bg_light
-_T.bg_urgent                                 = colors.red
-_T.bg_minimize                               = colors.bg_light
+_T.bg_normal                                 = _T.bg_normal
+_T.bg_focus                                  = _T.bg_light
+_T.bg_urgent                                 = _T.red
+_T.bg_minimize                               = _T.bg_light
 _T.bg_systray                                = _T.bg_normal
 
-_T.fg_normal                                 = colors.fg_norml
-_T.fg_focus                                  = colors.fg_light
-_T.fg_urgent                                 = colors.fg_light
-_T.fg_minimize                               = colors.fg_light
+_T.fg_normal                                 = _T.fg_normal
+_T.fg_focus                                  = _T.fg_light
+_T.fg_urgent                                 = _T.fg_light
+_T.fg_minimize                               = _T.fg_light
 
 _T.useless_gap                               = dpi(0)
 _T.border_width                              = dpi(1)
-_T.border_color_normal                       = colors.bg_normal
-_T.border_color_active                       = colors.mid_normal
-_T.border_color_marked                       = colors.red
+_T.border_color_normal                       = _T.bg_normal
+_T.border_color_active                       = _T.mid_normal
+_T.border_color_marked                       = _T.red
 
 -- There are other variable sets
 -- overriding the default one when
@@ -44,8 +68,8 @@ _T.border_color_marked                       = colors.red
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
-_T.taglist_bg_focus                          = colors.cyan
-_T.taglist_fg_focus                          = colors.bg_normal
+_T.taglist_bg_focus                          = _T.cyan
+_T.taglist_fg_focus                          = _T.bg_normal
 
 -- Generate taglist squares:
 local taglist_square_size                    = dpi(4)
@@ -65,7 +89,7 @@ _T.menu_submenu_icon                         = def_assets .. 'submenu.png'
 _T.menu_height                               = dpi(15)
 _T.menu_width                                = dpi(100)
 
-_T.awesome_icon                              = theme_assets.awesome_icon(_T.menu_height, _T.bg_focus, _T.fg_focus)
+_T.awesome_icon                              = theme_assets.awesome_icon(_T.menu_height, _T.fg_focus, _T.bg_focus)
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -122,7 +146,7 @@ _T.layout_cornerse                           = def_assets .. 'layouts/cornersew.
 rnotification.connect_signal('request::rules', function()
     rnotification.append_rule({
         rule = { urgency = 'critical' },
-        properties = { bg = colors.red, fg = colors.fg_normal },
+        properties = { bg = _T.red, fg = _T.fg_normal },
     })
 end)
 

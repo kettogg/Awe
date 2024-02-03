@@ -3,6 +3,10 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, 'luarocks.loader')
 
+-- Load the theme. In other words, defines the variables within the `beautiful`
+-- table.
+require('beautiful').init(require('theme'))
+
 -- Notification library.
 local naughty = require('naughty')
 -- Check if awesome encountered an error during startup and fell back to
@@ -21,10 +25,6 @@ require('awful.autofocus')
 -- name is opened:
 --require('awful.hotkeys_popup.keys')
 
--- Load the theme. In other words, defines the variables within the `beautiful`
--- table.
-require('beautiful').init(require('theme'))
-
 -- Treat all signals. Bear in mind this implies creating all tags, attaching
 -- their layouts, setting client behavior and loading UI.
 require('signal')
@@ -34,3 +34,16 @@ require('binds')
 
 -- Load all client rules.
 require('config.rules')
+
+-- Garbage Collector Settings
+require('gears').timer {
+  timeout = 5,
+  autostart = true,
+  call_now = true,
+  callback = function()
+    collectgarbage "collect"
+  end,
+}
+
+collectgarbage("setpause", 110)
+collectgarbage("setstepmul", 1000)

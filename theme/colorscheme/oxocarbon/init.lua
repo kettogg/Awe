@@ -30,4 +30,3 @@ _C.cyan         = '#3ddbd9'
 _C.cyan_dark    = '#2eb8b3'
 
 return _C
-
