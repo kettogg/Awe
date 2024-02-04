@@ -1,0 +1,57 @@
+local awful     = require('awful')
+local beautiful = require('beautiful')
+local helpers   = require('helpers')
+local wibox     = require('wibox')
+local dpi       = require('beautiful').xresources.apply_dpi
+
+return function()
+	-- Toggler
+	local togglertext = wibox.widget {
+		font = beautiful.term,
+		text = '‹',
+		valign = 'center',
+		align = 'center',
+		widget = wibox.widget.textbox,
+	}
+
+	-- Tray
+	local systray     = wibox.widget {
+		{
+			{
+				widget = wibox.widget.systray,
+			},
+			widget = wibox.container.place,
+			valign = 'center',
+		},
+		visible = false,
+		left = 4,
+		right = 4,
+		widget = wibox.container.margin
+	}
+
+	awesome.connect_signal('systray::toggle', function()
+		if systray.visible then
+			systray.visible = false
+			togglertext.text = '‹'
+		else
+			systray.visible = true
+			togglertext.text = '›'
+		end
+	end)
+
+	local widget = wibox.widget {
+		{
+			systray,
+			togglertext,
+			layout = wibox.layout.fixed.horizontal,
+		},
+		buttons = {
+			awful.button({}, 1, function()
+				awesome.emit_signal('systray::toggle')
+			end)
+		},
+		margins = { left = dpi(12), right = dpi(12) },
+		widget  = wibox.container.margin,
+	}
+	return widget
+end

@@ -6,14 +6,18 @@ local beautiful = require('beautiful')
 local dpi       = beautiful.xresources.apply_dpi
 
 return function(s)
-	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
+	s.promptbox = awful.widget.prompt({
+		prompt = 'Run: ',
+		fg_cursor = beautiful.bg_normal,
+		bg_cursor = beautiful.fg_normal,
+	}) -- Create a promptbox.
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		position = 'bottom',
 		screen   = s,
-		height   = dpi(40),
-		ontop    = true,
+		height   = dpi(42),
+		-- ontop    = true,
 		widget   = {
 			widget = wibox.container.margin,
 			top = dpi(1),
@@ -25,17 +29,26 @@ return function(s)
 					layout = wibox.layout.fixed.horizontal,
 					module.launcher(),
 					module.taglist(s),
-					s.mypromptbox
+					module.layoutbox(s),
+					{
+						s.promptbox,
+						margins = { left = dpi(4), right = dpi(4) },
+						widget = wibox.container.margin
+					},
 				},
 				-- Middle widgets.
 				module.tasklist(s),
 				-- Right widgets.
 				{
 					layout = wibox.layout.fixed.horizontal,
+					module.systray(),
 					awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
-					wibox.widget.systray(),
-					wibox.widget.textclock(), -- Create a textclock widget.
-					module.layoutbox(s)
+					{
+						wibox.widget.textclock("%H:%M <span foreground='" ..
+							beautiful.mid_light .. "'>//</span> <span font='" .. beautiful.font .. " Italic'>%B %d</span>"), -- Create a textclock widget.
+						margins = { left = dpi(12), right = dpi(30) },
+						widget  = wibox.container.margin,
+					},
 				}
 			}
 		}

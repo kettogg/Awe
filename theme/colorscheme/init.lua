@@ -1,7 +1,7 @@
 local user        = require('config.user')
 local colorscheme = require('theme.colorscheme.default')
 local defwall     = require('gears.filesystem').get_configuration_dir() ..
-'theme/colorscheme/' .. (user.colorscheme or 'default') .. '/default.png'
+'theme/colorscheme/' .. (user.colorscheme or 'default') .. '/wallpaper.png'
 
 local _M          = {}
 

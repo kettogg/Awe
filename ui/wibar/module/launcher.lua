@@ -6,13 +6,13 @@ local dpi       = beautiful.xresources.apply_dpi
 return function()
 	return wibox.widget {
 		{
-			markup = "<span foreground='" .. beautiful.fg_normal .. "'>Menu</span>",
-			font = beautiful.term,
+			markup = "<span foreground='" .. beautiful.fg_normal .. "'>menu</span>",
+			-- font = beautiful.font,
 			align = 'center',
 			valign = 'center',
 			widget = wibox.widget.textbox
 		},
-		margins = { left = dpi(20), right = dpi(20), top = dpi(4), bottom = dpi(4) },
+		margins = { left = dpi(30), right = dpi(14) },
 		widget = wibox.container.margin,
 	}
 end

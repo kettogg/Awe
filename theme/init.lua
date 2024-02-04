@@ -4,15 +4,17 @@ local dpi           = require('beautiful.xresources').apply_dpi
 local rnotification = require('ruled.notification')
 local gfs           = require('gears.filesystem')
 local user          = require('config.user')
+local recolorImage  = require('helpers').recolorImage
+
 local asset_path    = gfs.get_configuration_dir() .. 'theme/assets/'
 local def_assets    = asset_path .. 'default/'
-
+local feather       = asset_path .. 'feather/'
 local colors        = require('theme.colorscheme').colors
 local _T            = {}
 
 _T.sans             = 'Satoshi 11'
 _T.nerd             = 'Iosevka NF'
-_T.term             = 'Iosevka NFM'
+_T.term             = 'Fairfax'
 _T.wallpaper        = require('theme.colorscheme').wallpaper
 _T.icon_theme       = user.icons
 
@@ -40,8 +42,8 @@ _T.cyan             = colors.cyan
 _T.cyan_dark        = colors.cyan_dark
 
 
-_T.font                                      = _T.sans
-_T.bg_normal                                 = _T.bg_normal
+_T.font                                      = _T.term
+_T.bg_normal                                 = _T.bg_light
 _T.bg_focus                                  = _T.bg_light
 _T.bg_urgent                                 = _T.red
 _T.bg_minimize                               = _T.bg_light
@@ -54,27 +56,30 @@ _T.fg_minimize                               = _T.fg_light
 
 _T.useless_gap                               = dpi(0)
 _T.border_width                              = dpi(1)
-_T.border_color_normal                       = _T.bg_normal
+_T.border_color_normal                       = _T.mid_normal
 _T.border_color_active                       = _T.mid_normal
 _T.border_color_marked                       = _T.red
 
--- There are other variable sets
--- overriding the default one when
--- defined, the sets are:
--- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
--- tasklist_[bg|fg]_[focus|urgent]
--- titlebar_[bg|fg]_[normal|focus]
--- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
--- prompt_[fg|bg|fg_cursor|bg_cursor|font]
--- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
--- Example:
+-- Taglist
 _T.taglist_bg_focus                          = _T.cyan
-_T.taglist_fg_focus                          = _T.bg_normal
+_T.taglist_fg_focus                          = _T.fg_normal
+_T.taglist_bg_urgent                         = _T.red
+_T.taglist_fg_urgent                         = _T.fg_normal
+_T.taglist_bg_occupied                       = _T.fg_dark
+_T.taglist_fg_occupied                       = _T.fg_normal
+_T.taglist_bg_empty                          = _T.mid_normal
+_T.taglist_fg_empty                          = _T.fg_normal
+_T.taglist_disable_icon                      = true
 
--- Generate taglist squares:
-local taglist_square_size                    = dpi(4)
-_T.taglist_squares_sel                       = theme_assets.taglist_squares_sel(taglist_square_size, _T.fg_normal)
-_T.taglist_squares_unsel                     = theme_assets.taglist_squares_unsel(taglist_square_size, _T.fg_normal)
+-- Tasklist
+_T.tasklist_plain_task_name                  = true
+_T.tasklist_bg_focus                         = _T.bg_normal
+_T.tasklist_bg_urgent                        = _T.bg_normal
+_T.tasklist_fg_normal                        = _T.mid_light
+_T.tasklist_fg_focus                         = _T.fg_normal
+_T.tasklist_fg_urgent                        = _T.red
+_T.tasklist_fg_minimize                      = _T.mid_light
+_T.tasklist_bg_minimize                      = _T.bg_normal
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -97,57 +102,28 @@ _T.awesome_icon                              = theme_assets.awesome_icon(_T.menu
 --_T.bg_widget = '#cc0000'
 
 -- Define the image to load
-_T.titlebar_close_button_normal              = def_assets .. 'titlebar/close_normal.png'
-_T.titlebar_close_button_focus               = def_assets .. 'titlebar/close_focus.png'
+_T.titlebar_close_button_normal              = recolorImage(feather .. 'x.svg', _T.fg_normal)
+_T.titlebar_close_button_focus               = recolorImage(feather .. 'x.svg', _T.fg_normal)
 
-_T.titlebar_minimize_button_normal           = def_assets .. 'titlebar/minimize_normal.png'
-_T.titlebar_minimize_button_focus            = def_assets .. 'titlebar/minimize_focus.png'
+_T.titlebar_minimize_button_normal           = recolorImage(feather .. 'minimize.svg', _T.fg_normal)
+_T.titlebar_minimize_button_focus            = recolorImage(feather .. 'minimize.svg', _T.fg_normal)
 
-_T.titlebar_ontop_button_normal_inactive     = def_assets .. 'titlebar/ontop_normal_inactive.png'
-_T.titlebar_ontop_button_focus_inactive      = def_assets .. 'titlebar/ontop_focus_inactive.png'
-_T.titlebar_ontop_button_normal_active       = def_assets .. 'titlebar/ontop_normal_active.png'
-_T.titlebar_ontop_button_focus_active        = def_assets .. 'titlebar/ontop_focus_active.png'
+_T.titlebar_ontop_button_normal_inactive     = recolorImage(feather .. 'command.svg', _T.fg_normal)
+_T.titlebar_ontop_button_focus_inactive      = recolorImage(feather .. 'command.svg', _T.fg_normal)
+_T.titlebar_ontop_button_normal_active       = recolorImage(feather .. 'command.svg', _T.fg_normal)
+_T.titlebar_ontop_button_focus_active        = recolorImage(feather .. 'command.svg', _T.fg_normal)
 
-_T.titlebar_sticky_button_normal_inactive    = def_assets .. 'titlebar/sticky_normal_inactive.png'
-_T.titlebar_sticky_button_focus_inactive     = def_assets .. 'titlebar/sticky_focus_inactive.png'
-_T.titlebar_sticky_button_normal_active      = def_assets .. 'titlebar/sticky_normal_active.png'
-_T.titlebar_sticky_button_focus_active       = def_assets .. 'titlebar/sticky_focus_active.png'
-
-_T.titlebar_floating_button_normal_inactive  = def_assets .. 'titlebar/floating_normal_inactive.png'
-_T.titlebar_floating_button_focus_inactive   = def_assets .. 'titlebar/floating_focus_inactive.png'
-_T.titlebar_floating_button_normal_active    = def_assets .. 'titlebar/floating_normal_active.png'
-_T.titlebar_floating_button_focus_active     = def_assets .. 'titlebar/floating_focus_active.png'
-
-_T.titlebar_maximized_button_normal_inactive = def_assets .. 'titlebar/maximized_normal_inactive.png'
-_T.titlebar_maximized_button_focus_inactive  = def_assets .. 'titlebar/maximized_focus_inactive.png'
-_T.titlebar_maximized_button_normal_active   = def_assets .. 'titlebar/maximized_normal_active.png'
-_T.titlebar_maximized_button_focus_active    = def_assets .. 'titlebar/maximized_focus_active.png'
-
--- You can use your own layout icons like this:
-_T.layout_fairh                              = def_assets .. 'layouts/fairhw.png'
-_T.layout_fairv                              = def_assets .. 'layouts/fairvw.png'
-_T.layout_floating                           = def_assets .. 'layouts/floatingw.png'
-_T.layout_magnifier                          = def_assets .. 'layouts/magnifierw.png'
-_T.layout_max                                = def_assets .. 'layouts/maxw.png'
-_T.layout_fullscreen                         = def_assets .. 'layouts/fullscreenw.png'
-_T.layout_tilebottom                         = def_assets .. 'layouts/tilebottomw.png'
-_T.layout_tileleft                           = def_assets .. 'layouts/tileleftw.png'
-_T.layout_tile                               = def_assets .. 'layouts/tilew.png'
-_T.layout_tiletop                            = def_assets .. 'layouts/tiletopw.png'
-_T.layout_spiral                             = def_assets .. 'layouts/spiralw.png'
-_T.layout_dwindle                            = def_assets .. 'layouts/dwindlew.png'
-_T.layout_cornernw                           = def_assets .. 'layouts/cornernww.png'
-_T.layout_cornerne                           = def_assets .. 'layouts/cornernew.png'
-_T.layout_cornersw                           = def_assets .. 'layouts/cornersww.png'
-_T.layout_cornerse                           = def_assets .. 'layouts/cornersew.png'
-
+_T.titlebar_maximized_button_normal_inactive = recolorImage(feather .. 'expand.svg', _T.fg_normal)
+_T.titlebar_maximized_button_focus_inactive  = recolorImage(feather .. 'expand.svg', _T.fg_normal)
+_T.titlebar_maximized_button_normal_active   = recolorImage(feather .. 'unexpand.svg', _T.fg_normal)
+_T.titlebar_maximized_button_focus_active    = recolorImage(feather .. 'unexpand.svg', _T.fg_normal)
 
 -- Set different colors for urgent notifications.
 rnotification.connect_signal('request::rules', function()
-    rnotification.append_rule({
-        rule = { urgency = 'critical' },
-        properties = { bg = _T.red, fg = _T.fg_normal },
-    })
+	rnotification.append_rule({
+		rule = { urgency = 'critical' },
+		properties = { bg = _T.red, fg = _T.fg_normal },
+	})
 end)
 
 _T.hotkeys_border_color = colors.mid_normal
