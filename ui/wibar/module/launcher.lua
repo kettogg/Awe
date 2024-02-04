@@ -14,5 +14,6 @@ return function()
 		},
 		margins = { left = dpi(30), right = dpi(14) },
 		widget = wibox.container.margin,
+		buttons = {},
 	}
 end

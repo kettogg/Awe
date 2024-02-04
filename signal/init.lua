@@ -5,5 +5,5 @@ return {
 	-- the correct layouts defined in `config.user` are appended to the tags
 	-- upon creation.
 	tag    = require(... .. '.tag'),
-	screen = require(... .. '.screen')
+	screen = require(... .. '.screen'),
 }

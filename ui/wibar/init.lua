@@ -16,7 +16,8 @@ return function(s)
 	s.mywibox = awful.wibar({
 		position = 'bottom',
 		screen   = s,
-		height   = dpi(42),
+		bg = beautiful.bg_normal,
+		height   = dpi(44),
 		-- ontop    = true,
 		widget   = {
 			widget = wibox.container.margin,
