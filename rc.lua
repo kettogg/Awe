@@ -35,6 +35,9 @@ require('binds')
 -- Load all client rules.
 require('config.rules')
 
+-- Load all startup apps.
+require('config.auto')
+
 -- Garbage Collector Settings
 require('gears').timer {
   timeout = 5,

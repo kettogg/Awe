@@ -4,13 +4,17 @@ local beautiful                = require('beautiful')
 local wibox                    = require('wibox')
 local gears                    = require('gears')
 local helpers                  = require('helpers')
-local gfs                      = gears.filesystem
-local feather                  = gfs.get_configuration_dir() .. 'theme/assets/feather/'
 local dpi                      = beautiful.xresources.apply_dpi
 local apps                     = require('config.apps')
 
 -- 'Sections'.
 local _S                       = {}
+-- TODO: Fix screenshot
+_S.screenshot                  = {
+	{ 'Fullscreen',                  apps.fullshot },
+	{ 'Selection',                   apps.selectshot },
+	{ 'Delay(' .. apps.delay .. ')', apps.delayshot },
+}
 
 _S.awesome                     = {
 	{ 'Keybinds',    function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -35,7 +39,8 @@ _M.mainmenu                    = awful.menu {
 		{ 'Terminal', apps.terminal },
 		{ 'Editor',   apps.editor },
 		{ 'Browser',  apps.browser },
-		{ 'Awesome',  _S.awesome, beautiful.awesome_icon },
+		--[[ 		{ 'Screenshot', _S.screenshot }, ]]
+		{ 'Awesome',  _S.awesome,   beautiful.awesome_icon },
 		{ 'Power',    _S.power }
 	},
 }

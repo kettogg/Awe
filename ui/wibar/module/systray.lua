@@ -7,8 +7,8 @@ local dpi       = require('beautiful').xresources.apply_dpi
 return function()
 	-- Toggler
 	local togglertext = wibox.widget {
-		font = beautiful.term,
-		text = '‹',
+		font = beautiful.nerd,
+		text = '',
 		valign = 'center',
 		align = 'center',
 		widget = wibox.widget.textbox,
@@ -32,10 +32,10 @@ return function()
 	awesome.connect_signal('systray::toggle', function()
 		if systray.visible then
 			systray.visible = false
-			togglertext.text = '‹'
+			togglertext.text = ''
 		else
 			systray.visible = true
-			togglertext.text = '›'
+			togglertext.text = ''
 		end
 	end)
 

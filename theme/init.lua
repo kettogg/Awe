@@ -41,7 +41,7 @@ _T.cyan                     = colors.cyan
 _T.cyan_dark                = colors.cyan_dark
 _T.transparent              = '#00000000'
 
-_T.font                     = _T.term
+_T.font                     = _T.nerd
 
 _T.bg_normal                = _T.bg_normal
 _T.bg_focus                 = _T.bg_light
@@ -92,7 +92,7 @@ _T.tasklist_bg_minimize     = _T.bg_normal
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-_T.menu_submenu_icon        = helpers.recolorImage(asset_path .. 'submenu.png', _T.fg_normal)
+_T.menu_submenu_icon        = helpers.recolorImage(asset_path .. 'submenu-pad.png', _T.fg_normal)
 _T.menu_height              = dpi(40)
 _T.menu_width               = dpi(196)
 _T.awesome_icon             = theme_assets.awesome_icon(_T.menu_height, _T.fg_focus, _T.bg_focus)
@@ -114,10 +114,10 @@ _T.titlebar_bg_urgent       = _T.bg_light
 
 -- Set different colors for urgent notifications.
 rnotification.connect_signal('request::rules', function()
-    rnotification.append_rule({
-        rule = { urgency = 'critical' },
-        properties = { bg = _T.red, fg = _T.fg_normal },
-    })
+	rnotification.append_rule({
+		rule = { urgency = 'critical' },
+		properties = { bg = _T.red, fg = _T.fg_normal },
+	})
 end)
 
 _T.hotkeys_border_color     = _T.mid_normal
@@ -129,9 +129,14 @@ _T.hotkeys_fg               = _T.fg_normal -- Hotkeys widget foreground color.
 _T.hotkeys_modifiers_fg     = _T.mid_light -- Foreground color used for hotkey modifiers (Ctrl, Alt, Super, etc).
 -- beautiful.hotkeys_label_bg 	Background color used for miscellaneous labels of hotkeys widget.
 -- beautiful.hotkeys_label_fg 	Foreground color used for hotkey groups and other labels.
-_T.hotkeys_font             = _T.term              -- Main hotkeys widget font.
-_T.hotkeys_description_font = _T.term .. ' Italic' -- Font used for hotkeys' descriptions.
+_T.hotkeys_font             = _T.nerd              -- Main hotkeys widget font.
+_T.hotkeys_description_font = _T.nerd .. ' Italic' -- Font used for hotkeys' descriptions.
 -- beautiful.hotkeys_group_margin
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
+
+-- Snap rectangles that appear when you move your client near screen edge
+_T.snap_bg                  = _T.red
+_T.snap_border_width        = dpi(2)
+_T.snap_shape               = helpers.rrect(0)
 
 return _T

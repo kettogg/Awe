@@ -6,6 +6,9 @@ local modkey        = mod.modkey
 
 local apps          = require('config.apps')
 local widgets       = require('ui')
+local brightness    = require('script.brightness')
+local volume        = require('script.volume')
+
 --- Global key bindings
 awful.keyboard.append_global_keybindings({
 	-- General Awesome keys.
@@ -146,5 +149,45 @@ awful.keyboard.append_global_keybindings({
 				t.layout = t.layouts[index] or t.layout
 			end
 		end
-	})
+	}),
+
+	-- Volume
+	awful.key({}, 'XF86AudioRaiseVolume', function()
+		volume.increase()
+	end),
+	awful.key({}, 'XF86AudioLowerVolume', function()
+		volume.decrease()
+	end),
+	awful.key({}, 'XF86AudioMute', function()
+		volume.mute()
+	end),
+
+	-- Brightness
+	awful.key({}, 'XF86MonBrightnessUp', function()
+		brightness.increase()
+	end),
+
+	awful.key({}, 'XF86MonBrightnessDown', function()
+		brightness.decrease()
+	end),
+
+	-- Screenshot -- TODO: Fix this
+	awful.key({
+		modifiers   = { modkey },
+		key         = 'Print',
+		description = 'Takes a full screenshot',
+		group       = 'miscelaneous',
+		on_press    = function()
+			awful.spawn('maim ~/Pictures/Screenshots/$(date +%s).png')
+		end
+	}),
+	awful.key({
+		modifiers   = { modkey, mod.shift },
+		key         = 'Print',
+		description = 'Takes a selection screenshot',
+		group       = 'miscelaneous',
+		on_press    = function()
+			awful.spawn('maim -s ~/Pictures/Screenshots/$(date +%s).png')
+		end
+	}),
 })
