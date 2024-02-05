@@ -1,6 +1,7 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local dpi = require('beautiful.xresources').apply_dpi
+local awful     = require('awful')
+local wibox     = require('wibox')
+local beautiful = require('beautiful')
+local dpi       = beautiful.xresources.apply_dpi
 return function(s)
 	-- Create a tasklist widget
 	local tasklist = awful.widget.tasklist({
@@ -8,6 +9,25 @@ return function(s)
 		filter          = awful.widget.tasklist.filter.currenttags,
 		layout          = {
 			layout = wibox.layout.flex.horizontal,
+		},
+		style           = {
+			-- Colors.
+			fg_minimize  = beautiful.mid_normal,
+			fg_normal    = beautiful.mid_normal,
+			fg_focus     = beautiful.fg_normal,
+			fg_urgent    = beautiful.red,
+			bg_focus     = beautiful.bg_normal,
+			bg_urgent    = beautiful.bg_normal,
+			bg_minimize  = beautiful.bg_normal,
+			-- Styling.
+			font         = beautiful.font,
+			disable_icon = true,
+			maximized    = '[+]',
+			minimized    = '[-]',
+			sticky       = '[*]',
+			floating     = '[~]',
+			ontop        = '[^]',
+			above        = '[^]'
 		},
 		widget_template = {
 			{

@@ -8,6 +8,7 @@ local apps          = require('config.apps')
 local widgets       = require('ui')
 local brightness    = require('script.brightness')
 local volume        = require('script.volume')
+local shooter       = require('script.shooter')
 
 --- Global key bindings
 awful.keyboard.append_global_keybindings({
@@ -171,23 +172,14 @@ awful.keyboard.append_global_keybindings({
 		brightness.decrease()
 	end),
 
-	-- Screenshot -- TODO: Fix this
-	awful.key({
-		modifiers   = { modkey },
-		key         = 'Print',
-		description = 'Takes a full screenshot',
-		group       = 'miscelaneous',
-		on_press    = function()
-			awful.spawn('maim ~/Pictures/Screenshots/$(date +%s).png')
-		end
-	}),
-	awful.key({
-		modifiers   = { modkey, mod.shift },
-		key         = 'Print',
-		description = 'Takes a selection screenshot',
-		group       = 'miscelaneous',
-		on_press    = function()
-			awful.spawn('maim -s ~/Pictures/Screenshots/$(date +%s).png')
-		end
-	}),
+	-- Screenshot
+	awful.key({}, 'Print', function()
+		shooter.selection()
+	end, { description = 'Select a region to screenshot', group = 'misc' }),
+	awful.key({ modkey }, 'Print', function()
+		shooter.screen()
+	end, { description = 'Select the whole screen to screenshot', group = 'misc' }),
+	awful.key({ mod.ctrl }, 'Print', function()
+		shooter.delayed()
+	end, { description = 'Select the whole screen to screenshot with delay', group = 'misc' }),
 })

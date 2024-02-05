@@ -32,4 +32,5 @@ return {
 	colorscheme = 'oxocarbon',
 	wallpaper   = nil,
 	icons       = '/usr/share/icons/Zafiro-Icons-Dark', -- Can't be nil as not handled in theme/init.lua
+	shooter_dir = '~/Pictures/Screenshots/' -- Screenshot directory
 }

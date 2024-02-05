@@ -77,9 +77,9 @@ return function(s)
 		}
 	})
 
-	return wibox.widget {
+	return wibox.widget({
 		taglist,
 		margins = { left = dpi(14), right = dpi(14) },
 		widget = wibox.container.margin,
-	}
+	})
 end

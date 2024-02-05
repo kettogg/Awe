@@ -46,7 +46,7 @@ return function(s)
 					awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
 					{
 						wibox.widget.textclock("%H:%M <span foreground='" ..
-							beautiful.mid_light .. "'>//</span> <span font='" .. beautiful.font .. " Italic'>%B %d</span>"), -- Create a textclock widget.
+							beautiful.mid_light .. "'>/</span> <span font='" .. beautiful.font .. " Italic'>%B %d</span>"), -- Create a textclock widget.
 						margins = { left = dpi(12), right = dpi(30) },
 						widget  = wibox.container.margin,
 					},
