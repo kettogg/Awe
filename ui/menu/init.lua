@@ -2,18 +2,24 @@ local awful                    = require('awful')
 local hotkeys_popup            = require('awful.hotkeys_popup')
 local beautiful                = require('beautiful')
 local wibox                    = require('wibox')
-local gears                    = require('gears')
 local helpers                  = require('helpers')
 local dpi                      = beautiful.xresources.apply_dpi
+local shooter                  = require('script.shooter')
 local apps                     = require('config.apps')
 
 -- 'Sections'.
 local _S                       = {}
--- TODO: Fix screenshot
+
 _S.screenshot                  = {
-	{ 'Fullscreen',                  apps.fullshot },
-	{ 'Selection',                   apps.selectshot },
-	{ 'Delay(' .. apps.delay .. ')', apps.delayshot },
+	{ 'Fullscreen', function()
+		shooter.screen()
+	end },
+	{ 'Selection', function()
+		shooter.selection()
+	end },
+	{ 'Delay', function()
+		shooter.delayed()
+	end },
 }
 
 _S.awesome                     = {
@@ -36,13 +42,17 @@ local _M                       = {}
 
 _M.mainmenu                    = awful.menu {
 	items = {
-		{ 'Terminal', apps.terminal },
-		{ 'Editor',   apps.editor },
-		{ 'Browser',  apps.browser },
-		--[[ 		{ 'Screenshot', _S.screenshot }, ]]
-		{ 'Awesome',  _S.awesome,   beautiful.awesome_icon },
-		{ 'Power',    _S.power }
+		{ 'Terminal',   apps.terminal },
+		{ 'Editor',     apps.editor },
+		{ 'Browser',    apps.browser },
+		{ 'Screenshot', _S.screenshot },
+		{ 'Awesome',    _S.awesome,   beautiful.awesome_icon },
+		{ 'Power',      _S.power }
 	},
+	theme = {
+		width = dpi(196),
+		height = dpi(40),
+	}
 }
 
 -- Rounded corners on the menu...

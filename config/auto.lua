@@ -11,8 +11,6 @@ local shell       = awful.spawn.with_shell
 local autorun     = true
 
 local autorunApps = {
-	-- '/usr/lib/xfce-polkit/xfce-polkit',
-	'picom &',
 }
 
 if autorun then

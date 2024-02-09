@@ -24,7 +24,7 @@ _H.recolorImage = function(image, color)
 	return gears.color.recolor_image(image, color)
 end
 
-_H.cropSurface = function(ratio, surf)
+_H.cropSurface  = function(ratio, surf)
 	local old_w, old_h = gears.surface.get_size(surf)
 	local old_ratio    = old_w / old_h
 	if old_ratio == ratio then return surf end

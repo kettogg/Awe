@@ -7,7 +7,7 @@ return {
 	-- this or do not have such a key, I suggest you to remap Mod4 to another key using
 	-- xmodmap or other tools. However, you can use another modifier like Mod1, but it
 	-- may interact with others.
-	mod         = 'Mod1',
+	mod         = 'Mod4',
 	-- Each screen has its own tag table. You can just define one and append it to all
 	-- screens (default behavior).
 	tags        = { '1', '2', '3', '4', '5', '6', '7' },

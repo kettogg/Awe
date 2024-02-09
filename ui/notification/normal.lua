@@ -165,7 +165,7 @@ return function(n)
 						},
 						{
 							widget        = wibox.widget.separator,
-							color         = beautiful.red,
+							color         = beautiful.transparent,
 							forced_height = 1,
 							forced_width  = dpi(12)
 						}
@@ -203,12 +203,12 @@ return function(n)
 			{
 				widget   = wibox.container.constraint,
 				strategy = 'min',
-				width    = dpi(120),
+				width    = dpi(160),
 				{
 					widget       = wibox.container.background,
 					bg           = beautiful.bg_normal,
 					border_width = dpi(1),
-					border_color = beautiful.red,
+					border_color = beautiful.mid_normal,
 					{
 						layout = wibox.layout.fixed.vertical,
 						titlebox,

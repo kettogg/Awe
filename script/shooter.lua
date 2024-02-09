@@ -62,7 +62,7 @@ end
 -- Takes a screenshot and puts it in `/tmp`, then copies it to system clipboard
 -- and notifies about the result.
 local function take_screenshot(cmd)
-   local tmp = '/tmp/SS-' .. os.date('%Y%m%d-%H%M%S') .. '.png'
+   local tmp = '/tmp/Screenshot-' .. os.date('%Y%m%d-%H%M%S') .. '.png'
    awful.spawn.easy_async_with_shell(cmd .. ' ' .. tmp, function()
       awful.spawn.with_shell('xclip -selection clip -t image/png -i ' .. tmp)
       send_notif(tmp)
