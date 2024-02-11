@@ -1,0 +1,6 @@
+[submodule "rubato"]
+	path = rubato
+	url = https://github.com/andOrlando/rubato.git
+[submodule "config/awesome/module/rubato"]
+	path = config/awesome/module/rubato
+	url = https://github.com/andOrlando/rubato.git

@@ -1,0 +1,36 @@
+import = [
+  "~/.config/alacritty/themes/oxocarbon.toml"
+]
+
+[font]
+size = 14.0
+offset = { x = -1, y = 0 }
+
+[font.bold]
+family = "Iosevka NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "Iosevka NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "Iosevka NF"
+style = "Italic"
+
+[font.normal]
+family = "Iosevka NF"
+style = "Regular"
+
+[cursor]
+style = { shape = "Block", blinking = "Off" } 
+
+
+[window]
+dimensions = { columns = 96, lines = 20 }
+padding = { x = 16, y = 16 }
+
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+]
