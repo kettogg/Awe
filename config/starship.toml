@@ -5,3 +5,16 @@ command_timeout = 1000
 
 [directory]
 format = "[$path](bg:none fg:blue) "
+
+[git_status]
+conflicted = "="
+ahead = "⇡ ${count}"
+behind = "⇣ ${count}"
+diverged = "↑ ${ahead_count} ⇣ ${behind_count} "
+up_to_date = " "
+untracked = "?${count}"
+stashed = "󰏖 "
+modified = "!${count}"
+staged = "+${count}"
+renamed = "» ${count}"
+deleted = " ${count}"
