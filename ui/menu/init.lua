@@ -31,7 +31,8 @@ _S.awesome                     = {
 }
 
 _S.power                       = {
-	{ 'Log off',  function() awesome.quit() end },
+	{ 'Lock',			function() awful.spawn.with_shell("$HOME/.local/bin/lock") end },
+	{ 'Log Off',  function() awesome.quit() end },
 	{ 'Suspend',  function() os.execute('suspend') end },
 	{ 'Reboot',   function() os.execute('reboot') end },
 	{ 'Shutdown', function() os.execute('poweroff') end }
