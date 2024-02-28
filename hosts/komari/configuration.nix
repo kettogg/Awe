@@ -189,6 +189,7 @@
     pamixer
     pciutils
     polkit_gnome
+    python312
     simplescreenrecorder
     unzip
     usbutils
@@ -206,6 +207,10 @@
     (callPackage ../../pkgs/cursors/fuyu.nix {})
     (callPackage ../../pkgs/sddm/sugar-candy.nix {})
   ];
+
+  # Nix-ld
+  # See https://github.com/Mic92/Nix-ld
+  programs.nix-ld.enable = true;
 
   # Thunar
   programs.thunar.enable = true;

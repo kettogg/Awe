@@ -97,7 +97,7 @@ in
   imports = [
     (import ./cfg/term/alacritty { inherit colors; })
     (import ./cfg/lock { inherit colors; })
-    (import ./cfg/shell/zsh { inherit config colors; })
+    (import ./cfg/shell/zsh { inherit config colors pkgs; })
     (import ../shared/bin { inherit config colors; })
   ];
 

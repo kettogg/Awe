@@ -1,4 +1,4 @@
-{ config, colors, ... }:
+{ config, colors, pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -24,8 +24,13 @@
       save = 1024;
     };
     initExtra = ''
+      # This let's me execute arbitrary binaries downloaded through channels such as mason.
+      # See https://www.reddit.com/r/NixOS/comments/13uc87h/masonnvim_broke_on_nixos
+      # To use this we need to enable https://github.com/Mic92/nix-ld
+      export NIX_LD=$(nix eval --impure --raw --expr 'let pkgs = import <nixpkgs> {}; NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker"; in NIX_LD')
+
       export PATH=${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/nvim/mason/bin:$PATH
-      export COLS=${colors.background}\ ${colors.foreground}\ ${colors.color1}\ ${colors.color2}\ ${colors.color3}\ ${colors.color4}\ ${colors.color5}\ ${colors.color6}\ ${colors.color7}\ ${colors.color8}\ ${colors.color9}\ ${colors.color10}\ ${colors.color11}\ ${colors.color12}\ ${colors.color13}\ ${colors.color14}\ ${colors.color15}
+      
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
   };
