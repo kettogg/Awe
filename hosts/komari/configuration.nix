@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ../shared/nvidia    
     ];
 
   # Bootloader
@@ -42,65 +43,35 @@
     LC_TIME = "en_IN";
   };
 
-  # X11
-  services.xserver.enable = true;
-
-  # Nvidia
-
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
   };
-
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.nvidia = {
-
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = false;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
-    # Only available from driver 515.43.04+
-    # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    open = false;
-
-    # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    
-    prime = {
-      offload = {
-        enable = true;
-	      enableOffloadCmd = true;
-      };
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
-
-  # DisplayManager
-  services.xserver.displayManager.startx.enable = true;
-  
+ 
   # AwesomeWM
-  services.xserver.windowManager.awesome = {
+  services.xserver = {
     enable = true;
-    package = pkgs.awesome-git;
+    dpi = 144;
+    displayManager = {
+      startx.enable = true;
+      sddm = {
+        enable = true; # Needed for polkit service to work
+        theme = "Sugar-Candy";
+        settings = {
+          Theme = {
+            CursorTheme = "Fuyu";
+          };
+        };
+      }; 
+      defaultSession = "none+awesome";
+    };
+
+    windowManager.awesome = {
+      enable = true;
+      package = pkgs.awesome-git;
+    };
   };
 
   # Dbus
@@ -108,23 +79,29 @@
 
   # Polkit
   security.polkit.enable = true;
-  # systemd = {
-  # user.services.polkit-gnome-authentication-agent-1 = {
-  #   description = "polkit-gnome-authentication-agent-1";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   wants = [ "graphical-session.target" ];
-  #   after = [ "graphical-session.target" ];
-  #   serviceConfig = {
-  #       Type = "simple";
-  #       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  #       Restart = "on-failure";
-  #       RestartSec = 1;
-  #       TimeoutStopSec = 10;
-  #     };
-  #   };
-  # };
-  # Gtk
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+
+  # Make gtk happy
   programs.dconf.enable = true;
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # Keymaps in X11
   services.xserver = {
@@ -150,6 +127,9 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  # Bluetooth
+
 
   # Touchpad
   services.xserver.libinput = {
@@ -187,13 +167,21 @@
   # List packages installed in system profile. 
   # To search, run: $ nix search wget
   environment.systemPackages = with pkgs; [
+    betterlockscreen
     brightnessctl
+    bluez
+    bluez-tools
     coreutils
     gcc
     git
+    glib
+    gtk3
     htop
     home-manager
+    libsForQt5.qt5.qtgraphicaleffects # Required by SDDM
+    libsForQt5.qt5.qtquickcontrols2
     lshw
+    maim
     neofetch
     neovim
     networkmanagerapplet
@@ -201,11 +189,22 @@
     pamixer
     pciutils
     polkit_gnome
+    simplescreenrecorder
     unzip
     usbutils
     wget
+    xarchiver
     xclip
+    xdg-utils
+    xdotool
     xorg.xcompmgr # Compositor
+    xorg.xf86inputevdev
+    xorg.xf86inputlibinput
+    xorg.xf86inputsynaptics
+    xorg.xf86videointel
+    zip
+    (callPackage ../../pkgs/cursors/fuyu.nix {})
+    (callPackage ../../pkgs/sddm/sugar-candy.nix {})
   ];
 
   # Thunar
@@ -219,10 +218,21 @@
   services.tumbler.enable = true; # Thumbnail support for images
 
   # Fonts
+  fonts.packages = with pkgs; [
+    ibm-plex
+    manrope
+    material-design-icons
+    material-symbols
+    noto-fonts-cjk
+    noto-fonts-color-emoji
+    rubik
+    (nerdfonts.override { fonts = [ "Iosevka" ]; })
+  ];
+
   fonts.fontconfig = {
     defaultFonts = {
-      serif = [ "IBM Plex Sans" ];
-      sansSerif = [ "IBM Plex Sans" ];
+      serif = [ "IBM Plex Serif" ];
+      sansSerif = [ "Manrope" ];
       monospace = [ "Iosevka Nerd Font Mono" ];
     };
   };
@@ -255,5 +265,16 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "@wheel" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 5d";
+    };
+    optimise.automatic = true;
+  };
 }

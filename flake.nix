@@ -13,17 +13,21 @@
     nur.url = github:nix-community/NUR;
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-f2k, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixpkgs-f2k, ... } @ inputs:
     let
+      inherit (self) outputs;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       nixosConfigurations = {
         komari = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [
-	    home-manager.nixosModule
+	          home-manager.nixosModule
             ./hosts/komari/configuration.nix
-	    {
+	          {
               nixpkgs.overlays = [
                 nixpkgs-f2k.overlays.window-managers
               ];
@@ -34,9 +38,12 @@
       homeConfigurations = {
         re1san = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+          extraSpecialArgs = {
+            inherit inputs outputs self;
+          };
           modules = [
             ./home/re1san/home.nix
-	    {
+	          {
               nixpkgs.overlays = [
                 nixpkgs-f2k.overlays.window-managers
               ];

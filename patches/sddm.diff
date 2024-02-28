@@ -1,0 +1,73 @@
+diff --git a/theme.conf b/theme.conf
+index f39fb68..ab95216 100644
+--- a/theme.conf
++++ b/theme.conf
+@@ -1,6 +1,6 @@
+ [General]
+ 
+-Background="Backgrounds/Mountain.jpg"
++Background="Backgrounds/Default.png"
+ ## Path relative to the theme root directory. Most standard image file formats are allowed including support for transparency. (e.g. background.jpeg/illustration.GIF/Foto.png/undraw.svgz)
+ 
+ DimBackgroundImage="0.0"
+@@ -9,8 +9,8 @@ DimBackgroundImage="0.0"
+ ScaleImageCropped="true"
+ ## Whether the image should be cropped when scaled proportionally. Setting this to false will fit the whole image instead, possibly leaving white space. This can be exploited beautifully with illustrations (try it with "undraw.svg" included in the theme).
+ 
+-ScreenWidth="1440"
+-ScreenHeight="900"
++ScreenWidth="2560"
++ScreenHeight="1600"
+ ## Adjust to your resolution to help SDDM speed up on calculations
+ 
+ 
+@@ -18,7 +18,7 @@ ScreenHeight="900"
+ ## [Blur Settings]
+ 
+ FullBlur="false"
+-PartialBlur="true"
++PartialBlur="false"
+ ## Enable or disable the blur effect; if HaveFormBackground is set to true then PartialBlur will trigger the BackgroundColor of the form element to be partially transparent and blend with the blur.
+ 
+ BlurRadius="100"
+@@ -40,14 +40,14 @@ BackgroundImageHAlignment="center"
+ BackgroundImageVAlignment="center"
+ ## As before but for the vertical position of the background picture relative to its visible area.
+ 
+-MainColor="white"
++MainColor="#dde1e6"
+ ## Used for all elements when not focused/hovered etc. Usually the best effect is achieved by having this be either white or a very dark grey like #444 (not black for smoother antialias)
+ ## Colors can be HEX or Qt names (e.g. red/salmon/blanchedalmond). See https://doc.qt.io/qt-5/qml-color.html
+ 
+-AccentColor="#fb884f"
++AccentColor="#3ddbd9"
+ ## Used for elements in focus/hover/pressed. Should be contrasting to the background and the MainColor to achieve the best effect.
+ 
+-BackgroundColor="#444"
++BackgroundColor="#1e1e1e"
+ ## Used for the user and session selection background as well as for ScreenPadding and FormBackground when either is true. If PartialBlur and FormBackground are both enabled this color will blend with the blur effect.
+ 
+ OverrideLoginButtonTextColor=""
+@@ -65,10 +65,10 @@ RoundCorners="20"
+ ScreenPadding="0"
+ ## Integer in pixels. Increase or delete this to have a padding of color BackgroundColor all around your screen. This makes your login greeter appear as if it was a canvas. Cool!
+ 
+-Font="Noto Sans"
++Font="IBM Plex Sans"
+ ## If you want to choose a custom font it will have to be available to the X root user. See https://wiki.archlinux.org/index.php/fonts#Manual_installation
+ 
+-FontSize=""
++FontSize="10"
+ ## Only set a fixed value if fonts are way too small for your resolution. Preferrably kept empty.
+ 
+ 
+@@ -116,7 +116,7 @@ DateFormat="dddd, d of MMMM"
+ 
+ ## [Translations]
+ 
+-HeaderText="Welcome!"
++HeaderText="Welcome Rei!"
+ ## Header can be empty to not display any greeting at all. Keep it short.
+ 
+ ## SDDM may lack proper translation for every element. Suger defaults to SDDM translations. Please help translate SDDM as much as possible for your language: https://github.com/sddm/sddm/wiki/Localization. These are in order as they appear on screen.
+

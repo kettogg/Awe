@@ -1,6 +1,21 @@
 { config, pkgs, ... }:
 
+let
+  callPackage = pkgs.callPackage;
+  colors = import ../shared/colors/oxocarbon.nix {};
+in
 {
+  nixpkgs = { 
+    overlays = [
+      ( import ../../overlays/default.nix )
+    ];
+    config = {
+      allowUnfree = true;
+      allowBroken = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
+
   programs.home-manager.enable = true;
 
   home = { 
@@ -11,38 +26,60 @@
     sessionVariables = {
       EDITOR = "nvim";
     };
-   
+  };
+  
+  # Cursor
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    name = "Fuyu";
+    package = callPackage ../../pkgs/cursors/fuyu.nix {};
+    size = 32;
+  };
+
+  # Gtk
+  gtk = {
+    enable = true;
+    iconTheme.package = callPackage ../../pkgs/icons/zafiro.nix {};
+    iconTheme.name = "Zafiro-Icons-Dark-Blue";
+    theme.package = pkgs.materia-theme;
+    theme.name = "Materia-dark";
+  };
+
+  # Qt
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style.name = "gtk2";
+  };
+
+  home = { 
+    # Clone configurations
+    activation = {
+      installConfig = ''
+        if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
+          ${pkgs.git}/bin/git clone --depth 1 --branch rework --recurse-submodules https://github.com/re1san/Awe.git ${config.home.homeDirectory}/.config/awesome 
+        fi
+        if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
+          ${pkgs.git}/bin/git clone --depth 1 https://github.com/re1san/Nv.git ${config.home.homeDirectory}/.config/nvim
+        fi
+      '';
+    };
+
     # Packages
     packages = with pkgs; [
       alacritty
       cava
       discord
-      #dconf # For gtk (set in configuration.nix)
       eza
       firefox
       google-chrome
-      maim # Screenshot
+      materia-theme
       playerctl
       redshift
+      (import ../../pkgs/misc/bloks.nix { inherit pkgs; })
     ];
   };
-
-  nixpkgs.config = {
-    permittedInsecurePackages = [ "electron-25.9.0" ];
-    allowUnfree = true;
-    allowBroken = true;
-    allowUnfreePredicate = _: true;
-  };
-
-  # Starship
-  programs.starship.enable = true;
-
-  # X configuration
-  home.file.".Xresources".text = ''
-    Xft.dpi: 144
-    Xcursor.theme: Tsuki_Snow
-    Xcursor: 32
-  '';
 
   home.file.".xinitrc".text = ''
     #!/usr/bin/env bash
@@ -50,18 +87,18 @@
     exec awesome  
   '';
 
-  # Discord
   home.file.".config/discord/settings.json".text = ''
   {
     "SKIP_HOST_UPDATE": true
   }
   '';
 
-  # Gtk
-  gtk = {
-    enable = true;
-    iconTheme.name = "Zafiro-Icons-Dark-Blue";
-    theme.name = "Materia-Dark";
-    cursorTheme.name = "Tsuki_Snow";
-  };
+  # Import configurations
+  imports = [
+    (import ./cfg/term/alacritty { inherit colors; })
+    (import ./cfg/lock { inherit colors; })
+    (import ./cfg/shell/zsh { inherit config colors; })
+    (import ../shared/bin { inherit config colors; })
+  ];
+
 } 

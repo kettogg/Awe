@@ -1,0 +1,13 @@
+diff --git a/src/_variables.scss b/src/_variables.scss
+index 73fb7ef..b24fc8b 100644
+--- a/src/_variables.scss
++++ b/src/_variables.scss
+@@ -26,7 +26,7 @@ $menuitem-size: 28px;
+ // Radii
+ //
+ 
+-$corner-radius: 4px;
++$corner-radius: 0px;
+ $circular-radius: 9999px;
+ 
+ //
