@@ -43,7 +43,7 @@
     enable = true;
     settings = {
       add_newline = false;
-      format = "$directory$git_branch$git_status$cmd_duration$python\n[  󰅂](fg:cyan) ";
+      format = "$nix_shell$directory$git_branch$git_status$cmd_duration$python\n[  󰅂](fg:cyan) ";
       command_timeout = 4000;
 
       directory = {
@@ -69,6 +69,12 @@
         symbol = "󰘬 ";
         format = "via [$symbol$branch(:$remote_branch)]($style) ";
         style = "red";
+      };
+      
+      nix_shell = {
+        disabled = false;
+        format = "[\\($name $state\\)]($style) ";
+        style = "purple";
       };
 
       python = {
