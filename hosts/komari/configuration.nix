@@ -129,7 +129,9 @@
   };
 
   # Bluetooth
-
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
 
   # Touchpad
   services.xserver.libinput = {
@@ -169,8 +171,6 @@
   environment.systemPackages = with pkgs; [
     betterlockscreen
     brightnessctl
-    bluez
-    bluez-tools
     coreutils
     gcc
     git
@@ -182,6 +182,7 @@
     libsForQt5.qt5.qtquickcontrols2
     lshw
     maim
+    nix-index # For nix-locate
     neofetch
     neovim
     networkmanagerapplet
@@ -211,6 +212,10 @@
   # Nix-ld
   # See https://github.com/Mic92/Nix-ld
   programs.nix-ld.enable = true;
+  # programs.nix-ld.libraries = with pkgs; [
+  #   stdenv.cc.cc.lib
+  #   zlib # For Numpy
+  # ];
 
   # Thunar
   programs.thunar.enable = true;

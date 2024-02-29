@@ -24,10 +24,13 @@
       save = 1024;
     };
     initExtra = ''
-      # This let's me execute arbitrary binaries downloaded through channels such as mason.
+      # This let's me execute arbitrary binaries downloaded through channels such as mason/pip from a venv.
       # See https://www.reddit.com/r/NixOS/comments/13uc87h/masonnvim_broke_on_nixos
       # To use this we need to enable https://github.com/Mic92/nix-ld
       export NIX_LD=$(nix eval --impure --raw --expr 'let pkgs = import <nixpkgs> {}; NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker"; in NIX_LD')
+      
+      # export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH # This one is risky to add here as there might be a possibility that a nix-package might access the loader through nix-ld instead of the system one.
+      # Better option is to add this in a shell.nix setup for a venv.
 
       export PATH=${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.local/share/nvim/mason/bin:$PATH
       
@@ -52,7 +55,7 @@
         ahead = "⇡ $count";
         behind = "⇣ $count";
         diverged = "↑ $ahead_count ⇣ $behind_count ";
-        up_to_date = " ";
+        up_to_date = " ";
         untracked = "?$count";
         stashed = "󰏖 ";
         modified = "!$count";

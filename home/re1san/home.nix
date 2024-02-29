@@ -77,6 +77,7 @@ in
       materia-theme
       playerctl
       redshift
+      vscode
       (import ../../pkgs/misc/bloks.nix { inherit pkgs; })
     ];
   };
