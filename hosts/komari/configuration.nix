@@ -209,6 +209,9 @@
     (callPackage ../../pkgs/sddm/sugar-candy.nix {})
   ];
 
+  # Upower
+  services.upower.enable = true;
+
   # Nix-ld
   # See https://github.com/Mic92/Nix-ld
   programs.nix-ld.enable = true;

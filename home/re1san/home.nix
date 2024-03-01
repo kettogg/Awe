@@ -74,6 +74,7 @@ in
       eza
       firefox
       google-chrome
+      imagemagick
       materia-theme
       playerctl
       redshift
