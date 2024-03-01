@@ -12,10 +12,10 @@
 -- c = change == ending - beginning
 -- d = duration == running time. How much time has passed *right now*
 
-local gobject = require("gears.object")
-local gtable = require("gears.table")
+local gobject                            = require('gears.object')
+local gtable                             = require('gears.table')
 
-local tween = {
+local tween                              = {
 	_VERSION     = 'tween 2.1.1',
 	_DESCRIPTION = 'tweening for lua',
 	_URL         = 'https://github.com/kikito/tween.lua',
@@ -434,19 +434,19 @@ end
 local function checkNewParams(initial, duration, subject, target, easing)
 	-- assert(type(initial) == 'number' and duration > 0, "duration must be a positive number. Was " .. tostring(duration))
 	-- assert(type(duration) == 'number' and duration > 0, "duration must be a positive number. Was " .. tostring(duration))
-	assert(type(easing) == 'function', "easing must be a function. Was " .. tostring(easing))
+	assert(type(easing) == 'function', 'easing must be a function. Was ' .. tostring(easing))
 
 	if subject and target then
 		local tsubject = type(subject)
 		assert(tsubject == 'table' or tsubject == 'userdata',
-			"subject must be a table or userdata. Was " .. tostring(subject))
-		assert(type(target) == 'table', "target must be a table. Was " .. tostring(target))
+			'subject must be a table or userdata. Was ' .. tostring(subject))
+		assert(type(target) == 'table', 'target must be a table. Was ' .. tostring(target))
 		checkSubjectAndTargetRecursively(subject, target)
 	end
 end
 
 local function getEasingFunction(easing)
-	easing = easing or "linear"
+	easing = easing or 'linear'
 	if type(easing) == 'string' then
 		local name = easing
 		easing = tween.easing[name]
@@ -470,7 +470,7 @@ local function performEasingOnSubject(subject, target, initial, clock, duration,
 end
 
 local function performEasing(table, initial, target, clock, duration, easing)
-	if type(target) == "table" then
+	if type(target) == 'table' then
 		local t, b, c, d
 		for k, v in pairs(target) do
 			if type(v) == 'table' then
@@ -493,7 +493,7 @@ end
 local Tween = {}
 
 function Tween:set(clock)
-	assert(type(clock) == 'number', "clock must be a positive number or 0")
+	assert(type(clock) == 'number', 'clock must be a positive number or 0')
 
 	if self.subject and self.initial == 0 then
 		self.initial = copyTables({}, self.target, self.subject)
@@ -525,7 +525,7 @@ function Tween:set(clock)
 end
 
 function Tween:update(dt)
-	assert(type(dt) == 'number', "dt must be a number")
+	assert(type(dt) == 'number', 'dt must be a number')
 	return self:set(self.clock + dt)
 end
 

@@ -1,6 +1,6 @@
 local beautiful         = require('beautiful')
 local theme_assets      = require('beautiful.theme_assets')
-local dpi               = require('beautiful.xresources').apply_dpi
+local dpi               = beautiful.xresources.apply_dpi
 local rnotification     = require('ruled.notification')
 local gfs               = require('gears.filesystem')
 local user              = require('config.user')
@@ -13,10 +13,14 @@ local _T                = {}
 
 -- General
 _T.sans                 = 'Satoshi 11'
-_T.nerd                 = 'Iosevka NF'
+_T.nerd                 = 'Iosevka Nerd Font Mono'
 _T.term                 = 'Fairfax'
 _T.wallpaper            = require('theme.colorscheme').wallpaper
 _T.icon_theme           = user.icons
+_T.avatar               = user.avatar or (asset_path .. 'hey.jpg')
+_T.songdefpic           = asset_path .. 'defsong.jpg'
+_T.scrwidth             = user.screen_width
+_T.scrheight            = user.screen_height -- Used in laucher widget
 
 -- Global Font
 _T.font                 = _T.nerd
@@ -84,6 +88,18 @@ _T.awesome_icon         = helpers.recolorImage(asset_path .. 'awesome.svg', _T.f
 _T.notification_default = _T.awesome_icon
 _T.notification_cancel  = helpers.recolorImage(asset_path .. 'awesome.svg', _T.red)
 
+-- Systray
+_T.bg_systray           = _T.bg_light
+_T.systray_max_rows     = 1
+_T.systray_icon_spacing = dpi(2)
+
+-- Layout Icons
+local layouts_path      = asset_path .. 'layout/'
+_T.layout_tile          = helpers.recolorImage(layouts_path .. 'tile_right.svg', _T.fg_normal)
+_T.layout_tileleft      = helpers.recolorImage(layouts_path .. 'tile_left.svg', _T.fg_normal)
+_T.layout_tilebottom    = helpers.recolorImage(layouts_path .. 'tile_bottom.svg', _T.fg_normal)
+_T.layout_floating      = helpers.recolorImage(layouts_path .. 'float.svg', _T.fg_normal)
+
 -- Titlebar
 _T.close_butt           = feather .. 'x.svg'
 _T.minimize_butt        = feather .. 'minimize.svg'
@@ -104,7 +120,8 @@ end)
 
 _T.hotkeys_border_color     = _T.mid_normal
 _T.hotkeys_fg               = _T.fg_normal         -- Hotkeys widget foreground color.
-_T.hotkeys_modifiers_fg     = _T.mid_light         -- Foreground color used for hotkey modifiers (Ctrl, Alt, Super, etc).
+_T.hotkeys_modifiers_fg     = _T
+		.mid_light                                     -- Foreground color used for hotkey modifiers (Ctrl, Alt, Super, etc).
 _T.hotkeys_font             = _T.nerd              -- Main hotkeys widget font.
 _T.hotkeys_description_font = _T.nerd .. ' Italic' -- Font used for hotkeys' descriptions.
 

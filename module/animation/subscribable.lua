@@ -5,7 +5,7 @@
 -------------------------------------------
 
 
-local gobject = require("gears.object")
+local gobject = require('gears.object')
 
 -- Kidna copying awesotre's stores on a surface level for added compatibility
 local function subscribable(args)
@@ -15,7 +15,7 @@ local function subscribable(args)
 	-- Subscrubes a function to the object so that it's called when `fire` is
 	-- Calls subscribe_callback if it exists as well
 	function ret:subscribe(func)
-		local id = tostring(func):gsub("function: ", "")
+		local id = tostring(func):gsub('function: ', '')
 		subscribed[id] = func
 
 		if self.subscribe_callback then self.subscribe_callback(func) end
@@ -26,7 +26,7 @@ local function subscribable(args)
 		if not func then
 			subscribed = {}
 		else
-			local id = tostring(func):gsub("function: ", "")
+			local id = tostring(func):gsub('function: ', '')
 			subscribed[id] = nil
 		end
 

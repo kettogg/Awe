@@ -7,14 +7,14 @@ return {
 	-- this or do not have such a key, I suggest you to remap Mod4 to another key using
 	-- xmodmap or other tools. However, you can use another modifier like Mod1, but it
 	-- may interact with others.
-	mod         = 'Mod4',
+	mod           = 'Mod4',
 	-- Each screen has its own tag table. You can just define one and append it to all
 	-- screens (default behavior).
-	tags        = { '1', '2', '3', '4', '5', '6', '7' },
+	tags          = { '1', '2', '3', '4', '5', },
 
 	-- Table of layouts to cover with awful.layout.inc, ORDER MATTERS, the first layout
 	-- in the table is your DEFAULT LAYOUT.
-	layouts     = {
+	layouts       = {
 		awful.layout.suit.floating,
 		awful.layout.suit.tile,
 		--awful.layout.suit.tile.left,
@@ -29,8 +29,11 @@ return {
 		--awful.layout.suit.magnifier,
 		--awful.layout.suit.corner.nw
 	},
-	colorscheme = 'oxocarbon',
-	wallpaper   = nil,
-	icons       = '/usr/share/icons/Zafiro-Icons-Dark', -- Can't be nil as not handled in theme/init.lua
-	shooter_dir = '~/Pictures/Screenshots/' -- Screenshot directory
+	screen_width  = 2560,
+	screen_height = 1600,
+	colorscheme   = 'oxocarbon',
+	avatar        = nil,                               -- Full path to your pfp
+	wallpaper     = nil,
+	icons         = '/usr/share/icons/Zafiro-Icons-Dark', -- Can't be nil as not handled in theme/init.lua
+	shooter_dir   = '~/Pictures/Screenshots/'          -- Screenshot directory
 }

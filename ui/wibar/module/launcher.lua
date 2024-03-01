@@ -1,37 +1,28 @@
 local awful     = require('awful')
 local beautiful = require('beautiful')
 local wibox     = require('wibox')
+local helpers   = require('helpers')
 local dpi       = beautiful.xresources.apply_dpi
 -- Create a launcher widget. Opens the Awesome menu when clicked.
 return function()
-	local widget = wibox.widget({
+	local launcher = wibox.widget {
 		{
-			{
-				text = 'menu',
-				font = beautiful.font,
-				align = 'center',
-				valign = 'center',
-				widget = wibox.widget.textbox
-			},
-			margins = { left = dpi(30), right = dpi(14) },
-			widget = wibox.container.margin,
+			widget = wibox.widget.imagebox,
+			image = beautiful.avatar,
+			forced_height = dpi(34),
+			forced_width = dpi(34),
+			clip_shape = helpers.rrect(34),
+			resize = true,
 		},
-		fg      = beautiful.fg_normal,
-		widget  = wibox.container.background,
+		margins = { left = dpi(10), right = dpi(6) },
+		widget = wibox.container.margin,
+
 		buttons = {
-			awful.button(nil, 1, function()
-				require('naughty').notification({
-					title   = '<i>Oh, oh</i>',
-					message = 'Dashboard is TODO!'
-				})
+			awful.button({}, 1, function()
+				awesome.emit_signal('toggle::launcher')
 			end)
-		}
-	})
-	widget:connect_signal('mouse::enter', function(self)
-		self.fg = beautiful.accent
-	end)
-	widget:connect_signal('mouse::leave', function(self)
-		self.fg = beautiful.fg_normal
-	end)
-	return widget
+		},
+	}
+
+	return launcher
 end

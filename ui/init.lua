@@ -1,7 +1,8 @@
 -- Returns all widgets, with assigned names, in a table.
 return {
+	launcher     = require(... .. '.launcher'),
 	menu         = require(... .. '.menu'),
 	notification = require(... .. '.notification'),
 	titlebar     = require(... .. '.titlebar'),
-	wibar        = require(... .. '.wibar')
+	wibar        = require(... .. '.wibar'),
 }

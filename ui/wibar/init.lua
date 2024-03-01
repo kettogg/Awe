@@ -16,42 +16,45 @@ return function(s)
 	s.mywibox = awful.wibar({
 		position = 'bottom',
 		screen   = s,
-		bg = beautiful.bg_normal,
-		height   = dpi(44),
+		bg       = beautiful.bg_normal,
+		height   = dpi(46),
 		-- ontop    = true,
 		widget   = {
-			widget = wibox.container.margin,
-			top = dpi(1),
-			color = beautiful.mid_normal,
 			{
-				layout = wibox.layout.align.horizontal,
 				-- Left widgets.
 				{
-					layout = wibox.layout.fixed.horizontal,
-					module.launcher(),
-					module.taglist(s),
-					module.layoutbox(s),
 					{
-						s.promptbox,
-						margins = { left = dpi(4), right = dpi(4) },
-						widget = wibox.container.margin
+						module.launcher(),
+						module.taglist(s),
+						layout = wibox.layout.fixed.horizontal,
 					},
+					widget = wibox.container.place,
+					valign = 'center',
 				},
+
 				-- Middle widgets.
 				module.tasklist(s),
+
 				-- Right widgets.
 				{
-					layout = wibox.layout.fixed.horizontal,
-					module.systray(),
-					awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
 					{
-						wibox.widget.textclock("%H:%M <span foreground='" ..
-							beautiful.mid_light .. "'>/</span> <span font='" .. beautiful.font .. " Italic'>%B %d</span>"), -- Create a textclock widget.
-						margins = { left = dpi(12), right = dpi(30) },
-						widget  = wibox.container.margin,
+						module.systray(),
+						module.music(),
+						module.control(),
+						module.time(),
+						module.layoutbox(s),
+						spacing = dpi(5),
+						layout = wibox.layout.fixed.horizontal,
 					},
-				}
-			}
+					margins = { top = dpi(5), bottom = dpi(5), left = dpi(6), right = dpi(6) },
+					widget = wibox.container.margin
+				},
+				layout = wibox.layout.align.horizontal,
+			},
+
+			top = dpi(1),
+			color = beautiful.mid_normal,
+			widget = wibox.container.margin,
 		}
 	})
 end

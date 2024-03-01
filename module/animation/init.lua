@@ -3,64 +3,64 @@
 -- @copyright 2021-2022 Kasper24
 -------------------------------------------
 
-local GLib = require("lgi").GLib
-local gobject = require("gears.object")
-local gtable = require("gears.table")
-local subscribable = require("module.animation.subscribable")
-local tween = require("module.animation.tween")
-local ipairs = ipairs
-local table = table
-local pairs = pairs
+local GLib                  = require('lgi').GLib
+local gobject               = require('gears.object')
+local gtable                = require('gears.table')
+local subscribable          = require('module.animation.subscribable')
+local tween                 = require('module.animation.tween')
+local ipairs                = ipairs
+local table                 = table
+local pairs                 = pairs
 
-local animation_manager = {}
-animation_manager.easing =
+local animation_manager     = {}
+animation_manager.easing    =
 {
-	linear = "linear",
-	inQuad = "inQuad",
-	outQuad = "outQuad",
-	inOutQuad = "inOutQuad",
-	outInQuad = "outInQuad",
-	inCubic = "inCubic",
-	outCubic = "outCubic",
-	inOutCubic = "inOutCubic",
-	outInCubic = "outInCubic",
-	inQuart = "inQuart",
-	outQuart = "outQuart",
-	inOutQuart = "inOutQuart",
-	outInQuart = "outInQuart",
-	inQuint = "inQuint",
-	outQuint = "outQuint",
-	inOutQuint = "inOutQuint",
-	outInQuint = "outInQuint",
-	inSine = "inSine",
-	outSine = "outSine",
-	inOutSine = "inOutSine",
-	outInSine = "outInSine",
-	inExpo = "inExpo",
-	outExpo = "outExpo",
-	inOutExpo = "inOutExpo",
-	outInExpo = "outInExpo",
-	inCirc = "inCirc",
-	outCirc = "outCirc",
-	inOutCirc = "inOutCirc",
-	outInCirc = "outInCirc",
-	inElastic = "inElastic",
-	outElastic = "outElastic",
-	inOutElastic = "inOutElastic",
-	outInElastic = "outInElastic",
-	inBack = "inBack",
-	outBack = "outBack",
-	inOutBack = "inOutBack",
-	outInBack = "outInBack",
-	inBounce = "inBounce",
-	outBounce = "outBounce",
-	inOutBounce = "inOutBounce",
-	outInBounce = "outInBounce"
+	linear       = 'linear',
+	inQuad       = 'inQuad',
+	outQuad      = 'outQuad',
+	inOutQuad    = 'inOutQuad',
+	outInQuad    = 'outInQuad',
+	inCubic      = 'inCubic',
+	outCubic     = 'outCubic',
+	inOutCubic   = 'inOutCubic',
+	outInCubic   = 'outInCubic',
+	inQuart      = 'inQuart',
+	outQuart     = 'outQuart',
+	inOutQuart   = 'inOutQuart',
+	outInQuart   = 'outInQuart',
+	inQuint      = 'inQuint',
+	outQuint     = 'outQuint',
+	inOutQuint   = 'inOutQuint',
+	outInQuint   = 'outInQuint',
+	inSine       = 'inSine',
+	outSine      = 'outSine',
+	inOutSine    = 'inOutSine',
+	outInSine    = 'outInSine',
+	inExpo       = 'inExpo',
+	outExpo      = 'outExpo',
+	inOutExpo    = 'inOutExpo',
+	outInExpo    = 'outInExpo',
+	inCirc       = 'inCirc',
+	outCirc      = 'outCirc',
+	inOutCirc    = 'inOutCirc',
+	outInCirc    = 'outInCirc',
+	inElastic    = 'inElastic',
+	outElastic   = 'outElastic',
+	inOutElastic = 'inOutElastic',
+	outInElastic = 'outInElastic',
+	inBack       = 'inBack',
+	outBack      = 'outBack',
+	inOutBack    = 'inOutBack',
+	outInBack    = 'outInBack',
+	inBounce     = 'inBounce',
+	outBounce    = 'outBounce',
+	inOutBounce  = 'inOutBounce',
+	outInBounce  = 'outInBounce'
 }
 
-local animation = {}
+local animation             = {}
 
-local instance = nil
+local instance              = nil
 
 local ANIMATION_FRAME_DELAY = 5
 
@@ -83,7 +83,7 @@ function animation:start(args)
 	-- I'd rather this always be a table, but Awestoer/Rubbto
 	-- except the :set() method to have 1 number value parameter
 	-- used to set the target
-	local is_table = type(args) == "table"
+	local is_table = type(args) == 'table'
 	local initial = is_table and (args.pos or self.pos) or self.pos
 	local subject = is_table and (args.subject or self.subject) or self.subject
 	local target = is_table and (args.target or self.target) or args
@@ -111,22 +111,22 @@ function animation:start(args)
 	self.last_elapsed = GLib.get_monotonic_time()
 
 	self.started:fire()
-	self:emit_signal("started")
+	self:emit_signal('started')
 end
 
 function animation:set(args)
 	self:start(args)
-	self:emit_signal("set")
+	self:emit_signal('set')
 end
 
 function animation:stop()
 	self.state = false
-	self:emit_signal("stopped")
+	self:emit_signal('stopped')
 end
 
 function animation:abort(reset)
 	animation:stop(reset)
-	self:emit_signal("aborted")
+	self:emit_signal('aborted')
 end
 
 function animation:initial()
@@ -163,7 +163,7 @@ function animation_manager:new(args)
 		ret:connect_signal(sig, sigfun)
 	end
 	if args.update ~= nil then
-		ret:connect_signal("update", args.update)
+		ret:connect_signal('update', args.update)
 	end
 
 	gtable.crush(ret, args, true)
@@ -207,18 +207,18 @@ local function new()
 							-- Snap to end
 							animation.pos = animation.tween.target
 							animation:fire(animation.pos)
-							animation:emit_signal("update", animation.pos)
+							animation:emit_signal('update', animation.pos)
 
 							animation.state = false
 							animation.ended:fire(pos)
 							table.remove(ret._private.animations, index)
-							animation:emit_signal("ended", animation.pos)
+							animation:emit_signal('ended', animation.pos)
 						end
 						-- Animation in process, keep updating
 					else
 						animation.pos = pos
 						animation:fire(animation.pos)
-						animation:emit_signal("update", animation.pos)
+						animation:emit_signal('update', animation.pos)
 					end
 				else
 					table.remove(ret._private.animations, index)

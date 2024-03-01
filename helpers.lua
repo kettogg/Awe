@@ -50,4 +50,11 @@ _H.cropSurface  = function(ratio, surf)
 	return out_surf
 end
 
+_H.recolorText  = function(txt, fg)
+	if fg == '' then
+		fg = beautiful.fg_normal
+	end
+	return "<span foreground='" .. fg .. "'>" .. txt .. '</span>'
+end
+
 return _H

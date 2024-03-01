@@ -1,52 +1,43 @@
 local awful     = require('awful')
-local wibox     = require('wibox')
 local beautiful = require('beautiful')
+local wibox     = require('wibox')
+local gears     = require('gears')
 local dpi       = beautiful.xresources.apply_dpi
+local helpers   = require('helpers')
+
 return function(s)
-	-- Create a tasklist widget
 	local tasklist = awful.widget.tasklist({
 		screen          = s,
 		filter          = awful.widget.tasklist.filter.currenttags,
-		layout          = {
-			layout = wibox.layout.flex.horizontal,
-		},
+		source          = function()
+			local ret = {}
+			for _, t in ipairs(s.tags) do
+				gears.table.merge(ret, t:clients())
+			end
+			return ret
+		end,
 		style           = {
-			-- Colors.
-			fg_minimize  = beautiful.mid_normal,
-			fg_normal    = beautiful.mid_normal,
-			fg_focus     = beautiful.fg_normal,
-			fg_urgent    = beautiful.red,
-			bg_focus     = beautiful.bg_normal,
-			bg_urgent    = beautiful.bg_normal,
-			bg_minimize  = beautiful.bg_normal,
-			-- Styling.
-			font         = beautiful.font,
-			disable_icon = true,
-			maximized    = '[+]',
-			minimized    = '[-]',
-			sticky       = '[*]',
-			floating     = '[~]',
-			ontop        = '[^]',
-			above        = '[^]'
+			disable_task_name = true,
+			bg_normal         = beautiful.transparent,
+			bg_focus          = beautiful.bg_light,
+			bg_urgent         = beautiful.red_dark,
+			bg_minimize       = beautiful.transparent,
+			shape             = helpers.rrect(1),
+		},
+		layout          = {
+			spacing = dpi(4),
+			layout = wibox.layout.fixed.horizontal
 		},
 		widget_template = {
-			{
-				{
-					{
-						id            = 'text_role',
-						forced_height = dpi(24),
-						widget        = wibox.widget.textbox,
-					},
-					halign = 'center',
-					valign = 'center',
-					layout = wibox.container.place,
-				},
-				left   = 10,
-				right  = 10,
-				widget = wibox.container.margin
-			},
-			id     = 'background_role',
 			widget = wibox.container.background,
+			id     = 'background_role',
+			{
+				widget  = wibox.container.margin,
+				margins = dpi(5),
+				{
+					widget = awful.widget.clienticon
+				}
+			}
 		},
 		buttons         = {
 			-- Left-clicking a client indicator minimizes it if it's unminimized, or unminimizes
@@ -54,18 +45,17 @@ return function(s)
 			awful.button(nil, 1, function(c)
 				c:activate({ context = 'tasklist', action = 'toggle_minimization' })
 			end),
-			-- Right-clicking a client indicator shows the list of all open clients in all visible
-			-- tags.
-			awful.button(nil, 3, function() awful.menu.client_list({ theme = { width = 250 } }) end),
 			-- Mousewheel scrolling cycles through clients.
 			awful.button(nil, 4, function() awful.client.focus.byidx(1) end),
 			awful.button(nil, 5, function() awful.client.focus.byidx(-1) end)
 		}
 	})
 
-	return {
+	local widget = wibox.widget({
 		tasklist,
-		margins = { left = dpi(12), right = dpi(12) },
+		margins = { top = dpi(5), bottom = dpi(5), left = dpi(4), right = dpi(4) },
 		widget = wibox.container.margin,
-	}
+	})
+
+	return widget
 end

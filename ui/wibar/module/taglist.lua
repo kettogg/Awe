@@ -1,18 +1,18 @@
 local awful     = require('awful')
 local wibox     = require('wibox')
-local gears     = require('gears')
 local helpers   = require('helpers')
 local animation = require('module.animation')
-local dpi       = require('beautiful.xresources').apply_dpi
+local beautiful = require('beautiful')
+local dpi       = beautiful.xresources.apply_dpi
 local modkey    = require('binds.mod').modkey
 
 return function(s)
 	-- Create a taglist widget
-	local taglist = awful.widget.taglist({
+	local taglist = awful.widget.taglist {
 		screen          = s,
 		filter          = awful.widget.taglist.filter.all,
 		layout          = {
-			spacing = dpi(6),
+			spacing = 8,
 			layout = wibox.layout.fixed.horizontal,
 		},
 		style           = {
@@ -22,10 +22,10 @@ return function(s)
 			{
 				valign        = 'center',
 				id            = 'background_role',
-				shape         = helpers.slantrect(1),
+				shape         = helpers.rrect(0),
 				widget        = wibox.container.background,
-				forced_width  = 32,
-				forced_height = 2,
+				forced_width  = 60,
+				forced_height = dpi(1),
 			},
 			widget = wibox.container.place,
 			create_callback = function(self, tag)
@@ -38,11 +38,11 @@ return function(s)
 				})
 				self.update = function()
 					if tag.selected then
-						self.taganim:set(72)
+						self.taganim:set(90)
 					elseif #tag:clients() > 0 then
-						self.taganim:set(48)
+						self.taganim:set(64)
 					else
-						self.taganim:set(32)
+						self.taganim:set(40)
 					end
 				end
 
@@ -75,11 +75,22 @@ return function(s)
 			awful.button(nil, 4, function(t) awful.tag.viewnext(t.screen) end),
 			awful.button(nil, 5, function(t) awful.tag.viewprev(t.screen) end)
 		}
-	})
+	}
 
-	return wibox.widget({
-		taglist,
-		margins = { left = dpi(14), right = dpi(14) },
+	local widget = wibox.widget {
+		{
+			{
+				taglist,
+				margins = { left = dpi(14), right = dpi(14) },
+				widget = wibox.container.margin,
+			},
+			shape = helpers.rrect(1),
+			bg = beautiful.bg_light,
+			widget = wibox.container.background,
+		},
+		margins = { top = dpi(1), bottom = dpi(1), left = dpi(4), right = dpi(4) },
 		widget = wibox.container.margin,
-	})
+	}
+
+	return widget
 end
