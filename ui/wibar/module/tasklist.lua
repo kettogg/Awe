@@ -32,11 +32,11 @@ return function(s)
 			widget = wibox.container.background,
 			id     = 'background_role',
 			{
-				widget  = wibox.container.margin,
-				margins = dpi(5),
 				{
 					widget = awful.widget.clienticon
-				}
+				},
+				margins = dpi(4),
+				widget  = wibox.container.margin,
 			}
 		},
 		buttons         = {

@@ -34,6 +34,6 @@ return {
 	colorscheme   = 'oxocarbon',
 	avatar        = nil,                               -- Full path to your pfp
 	wallpaper     = nil,
-	icons         = '/usr/share/icons/Zafiro-Icons-Dark', -- Can't be nil as not handled in theme/init.lua
+	icons         = '/home/re1san/.icons/Zafiro-Icons-Dark-Blue', -- Can't be nil as not handled in theme/init.lua
 	shooter_dir   = '~/Pictures/Screenshots/'          -- Screenshot directory
 }

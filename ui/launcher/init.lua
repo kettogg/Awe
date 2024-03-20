@@ -14,11 +14,13 @@ local dpi       = beautiful.xresources.apply_dpi
 awful.screen.connect_for_each_screen(function(s)
 	local launcherdisplay = wibox {
 		width = dpi(640),
-		shape = helpers.rrect(2),
+		shape = helpers.rrect(0),
 		height = dpi(480),
 		bg = beautiful.bg_normal,
 		ontop = true,
-		visible = false
+		visible = false,
+		border_width = dpi(1),
+		border_color = beautiful.mid_dark,
 	}
 
 	local prompt = wibox.widget {

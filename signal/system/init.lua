@@ -1,7 +1,7 @@
 return {
-	battery   = require(... .. '.battery'),
-	bluetooth = require(... .. '.bluetooth'),
-	network   = require(... .. '.network'),
+	-- battery   = require(... .. '.battery'),
+	-- bluetooth = require(... .. '.bluetooth'),
+	-- network   = require(... .. '.network'),
 	-- volume     = require(... .. '.volume'),
 	-- brightness = require(... .. '.brightness'),
 	-- microphone = require(... .. '.microphone'),

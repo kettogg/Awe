@@ -88,7 +88,7 @@ return function(s)
 			bg = beautiful.bg_light,
 			widget = wibox.container.background,
 		},
-		margins = { top = dpi(1), bottom = dpi(1), left = dpi(4), right = dpi(4) },
+		margins = { top = dpi(1), bottom = dpi(1), left = dpi(6), right = dpi(4) },
 		widget = wibox.container.margin,
 	}
 

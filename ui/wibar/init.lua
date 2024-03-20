@@ -26,6 +26,11 @@ return function(s)
 					{
 						module.launcher(),
 						module.taglist(s),
+						{
+							s.promptbox,
+							margins = { left = dpi(2), right = dpi(2) },
+							widget = wibox.container.margin
+						},
 						layout = wibox.layout.fixed.horizontal,
 					},
 					widget = wibox.container.place,
@@ -40,7 +45,7 @@ return function(s)
 					{
 						module.systray(),
 						module.music(),
-						module.control(),
+						-- module.control(),
 						module.time(),
 						module.layoutbox(s),
 						spacing = dpi(5),
@@ -51,7 +56,6 @@ return function(s)
 				},
 				layout = wibox.layout.align.horizontal,
 			},
-
 			top = dpi(1),
 			color = beautiful.mid_normal,
 			widget = wibox.container.margin,

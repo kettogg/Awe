@@ -9,9 +9,9 @@ return function()
 		{
 			widget = wibox.widget.imagebox,
 			image = beautiful.avatar,
-			forced_height = dpi(34),
-			forced_width = dpi(34),
-			clip_shape = helpers.rrect(34),
+			forced_height = dpi(32),
+			forced_width = dpi(32),
+			clip_shape = helpers.rrect(32),
 			resize = true,
 		},
 		margins = { left = dpi(10), right = dpi(6) },
