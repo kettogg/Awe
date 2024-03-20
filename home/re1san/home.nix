@@ -58,7 +58,7 @@ in
     activation = {
       installConfig = ''
         if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
-          ${pkgs.git}/bin/git clone --depth 1 --branch rework --recurse-submodules https://github.com/re1san/Awe.git ${config.home.homeDirectory}/.config/awesome 
+          ${pkgs.git}/bin/git clone --depth 1 --branch rei --recurse-submodules https://github.com/re1san/Awe.git ${config.home.homeDirectory}/.config/awesome 
         fi
         if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
           ${pkgs.git}/bin/git clone --depth 1 https://github.com/re1san/Nv.git ${config.home.homeDirectory}/.config/nvim

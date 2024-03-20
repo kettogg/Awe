@@ -95,6 +95,9 @@
     };
   };
 
+  # Docker
+  virtualisation.docker.enable = true;
+
   # Make gtk happy
   programs.dconf.enable = true;
   xdg.portal = {
@@ -171,6 +174,7 @@
   environment.systemPackages = with pkgs; [
     betterlockscreen
     brightnessctl
+    cmake
     coreutils
     gcc
     git
@@ -199,6 +203,7 @@
     xclip
     xdg-utils
     xdotool
+    xorg.libxcb
     xorg.xcompmgr # Compositor
     xorg.xf86inputevdev
     xorg.xf86inputlibinput
