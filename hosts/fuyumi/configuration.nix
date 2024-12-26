@@ -22,7 +22,7 @@
   };
 
   # Networking
-  networking.hostName = "komari";
+  networking.hostName = "fuyumi";
   networking.networkmanager.enable = true;
 
   # Timezone

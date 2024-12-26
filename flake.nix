@@ -20,13 +20,13 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       nixosConfigurations = {
-        komari = nixpkgs.lib.nixosSystem {
+        fuyumi = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
           };
           modules = [
 	          home-manager.nixosModule
-            ./hosts/komari/configuration.nix
+            ./hosts/fuyumi/configuration.nix
 	          {
               nixpkgs.overlays = [
                 nixpkgs-f2k.overlays.window-managers
