@@ -29,11 +29,11 @@ return {
 		--awful.layout.suit.magnifier,
 		--awful.layout.suit.corner.nw
 	},
-	screen_width  = 2560,
-	screen_height = 1600,
+	screen_width  = 1920,
+	screen_height = 1080,
 	colorscheme   = 'oxocarbon',
-	avatar        = nil,                               -- Full path to your pfp
+	avatar        = nil,                                        -- Full path to your pfp
 	wallpaper     = nil,
-	icons         = '/home/re1san/.icons/Zafiro-Icons-Dark-Blue', -- Can't be nil as not handled in theme/init.lua
-	shooter_dir   = '~/Pictures/Screenshots/'          -- Screenshot directory
+	icons         = '/home/ketto/.icons/Zafiro-Icons-Dark-Blue', -- Can't be nil as not handled in theme/init.lua
+	shooter_dir   = '~/Pictures/Screenshots/'                   -- Screenshot directory
 }
