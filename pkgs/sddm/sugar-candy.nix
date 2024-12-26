@@ -1,7 +1,7 @@
 { fetchFromGitHub, fetchurl, stdenv }:
 
 let
-  imgLink = "https://github.com/re1san/Awe/blob/walls/Tokyo.png?raw=true";
+  imgLink = "https://github.com/ketto/Awe/blob/walls/Tokyo.png?raw=true";
 
   image = fetchurl {
     url = imgLink;

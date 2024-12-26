@@ -36,13 +36,13 @@
         };
       };
       homeConfigurations = {
-        re1san = home-manager.lib.homeManagerConfiguration {
+        ketto = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
             inherit inputs outputs self;
           };
           modules = [
-            ./home/re1san/home.nix
+            ./home/ketto/home.nix
 	          {
               nixpkgs.overlays = [
                 nixpkgs-f2k.overlays.window-managers

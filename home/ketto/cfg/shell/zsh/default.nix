@@ -15,7 +15,7 @@
       muse  = "cd ~/Dev/MuseScore";
       freem = "sudo sh -c 'echo 1 >  /proc/sys/vm/drop_caches'";
       param = "ssh-keygen -R paramganga.iitr.ac.in && ssh -p 4422 dhruv_s.iitr@paramganga.iitr.ac.in";
-      hmswitch = "home-manager switch --flake /etc/nixos/#re1san";
+      hmswitch = "home-manager switch --flake /etc/nixos/#ketto";
       nixswitch = "sudo nixos-rebuild switch --flake /etc/nixos/#komari"; 
       nix-pkgs = "nix --extra-experimental-features 'nix-command flakes' search nixpkgs";
     };

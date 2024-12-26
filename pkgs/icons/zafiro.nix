@@ -4,7 +4,7 @@ stdenv.mkDerivation {
   name = "zafiro-icons-dark-blue";
 
   src = fetchurl {
-    url = "https://github.com/re1san/Awe/files/14420794/Zafiro-Icons-Dark-Blue.tar.gz";
+    url = "https://github.com/ketto/Awe/files/14420794/Zafiro-Icons-Dark-Blue.tar.gz";
     hash = "sha256-35TDWdJKEgJKjqjQqW2Bc6wQBNCZIqiGYiFtYxdynGw=";
   };
 

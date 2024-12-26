@@ -154,7 +154,7 @@
   };
 
   # Users
-  users.users.re1san = {
+  users.users.ketto = {
     isNormalUser = true;
     description = "Rei";
     extraGroups = [ 

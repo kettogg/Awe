@@ -19,8 +19,8 @@ in
   programs.home-manager.enable = true;
 
   home = { 
-    username = "re1san";
-    homeDirectory = "/home/re1san";
+    username = "ketto";
+    homeDirectory = "/home/ketto";
     stateVersion = "23.11";
     
     sessionVariables = {
@@ -58,10 +58,10 @@ in
     activation = {
       installConfig = ''
         if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
-          ${pkgs.git}/bin/git clone --depth 1 --branch rei --recurse-submodules https://github.com/re1san/Awe.git ${config.home.homeDirectory}/.config/awesome 
+          ${pkgs.git}/bin/git clone --depth 1 --branch rei --recurse-submodules https://github.com/ketto/Awe.git ${config.home.homeDirectory}/.config/awesome 
         fi
         if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
-          ${pkgs.git}/bin/git clone --depth 1 https://github.com/re1san/Nv.git ${config.home.homeDirectory}/.config/nvim
+          ${pkgs.git}/bin/git clone --depth 1 https://github.com/ketto/Nv.git ${config.home.homeDirectory}/.config/nvim
         fi
       '';
     };
